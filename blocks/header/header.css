@@ -1,0 +1,9 @@
+.header {
+    min-height: 74px;
+    display: flex;
+    margin-top: 45px;
+    margin-left: 200px;
+    margin-right: 200px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid rgba(84,84,84,.7);
+}
