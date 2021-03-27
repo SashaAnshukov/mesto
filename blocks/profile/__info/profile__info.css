@@ -1,7 +1,28 @@
 .profile__info {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: repeat(2, min-content);
     row-gap: 16px;
     column-gap: 18px;
+    align-items: baseline;
+}
+
+@media screen and (max-width:1023px) {
+    .profile__info {
+        grid-template-columns: repeat(2, min-content);
+    }
+}
+
+@media screen and (max-width:767px) {
+    .profile__info {
+        max-width: 282px;
+        margin-left: auto;
+        margin-right: auto;
+        justify-self: center;
+        justify-items: center;
+        grid-template-columns: repeat(1, min-content);
+        row-gap: 14px;
+        column-gap: 10px;
+        align-self: center;
+    }
 }

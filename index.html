@@ -8,28 +8,44 @@
     </head>
 
     <body class="page">
+
+        <div class="popup">
+            <div class="popup__overlay"></div>
+            <form class="popup__container">
+                <div class="popup__close-button"></div>
+                    <h3 class="popup__name">Редактировать профиль</h3>
+                    <div class="popup__input">
+                        <input type="text" value="" class="popup__title">
+                        <input type="text" value="" class="popup__subtitle">
+                    </div>
+                <button type ="submit" class="popup__button">Сохранить</button>
+            </form>
+        </div>
+
         <div class="page__container">
 
             <header class="header">
                 <img class="header__logo" src="./images/logo.svg" alt="логотип Mesto"/>
             </header>
 
-            <header class="profile">
-                <img class="profile__avatar" src="./images/Avatar.png" alt="Фото Жака-Ива Кусто" />
-                <div class="profile__info">
-                    <h1 class="profile__title">Жак-Ив Кусто</h1>
-                    <button class="profile__edit-button"></button>
-                    <div class="profile__subtitle">Исследователь океана</div>
+            <section class="profile">
+                <div class="profile__space">
+                    <img class="profile__avatar" src="./images/Avatar.png" alt="Фото Жака-Ива Кусто"/>
+                    <div class="profile__info">
+                        <h1 class="profile__title">Жак-Ив Кусто</h1>
+                        <button class="profile__edit-button opacity__buttons"></button>
+                        <p class="profile__subtitle">Исследователь океана</p>
+                    </div>
                 </div>
-                <button class="profile__add-button"></button>
-            </header>
+                <button class="profile__add-button opacity__buttons"></button>
+            </section>
         
             <section class="elements">
                 <article class="rectangle">
                     <img class="rectangle__image" src="./images/Karachaevsk.jpg" alt="Карачаевск"/>
                     <div class="rectangle__info">
                         <p class="rectangle__mesto-text">Карачаевск</p>
-                        <button class="rectangle__mesto-like"></button>
+                        <button class="rectangle__mesto-like opacity__like"></button>
                     </div>
                 </article>
             
@@ -37,7 +53,7 @@
                     <img class="rectangle__image" src="./images/batmansocks.jpg" alt="Гора Эльбрус"/>
                     <div class="rectangle__info">
                         <p class="rectangle__mesto-text">Гора Эльбрус</p>
-                        <button class="rectangle__mesto-like"></button>
+                        <button class="rectangle__mesto-like opacity__like"></button>
                     </div>
                 </article>
 
@@ -45,7 +61,7 @@
                     <img class="rectangle__image" src="./images/bats.png" alt="Домбай"/>
                     <div class="rectangle__info">
                         <p class="rectangle__mesto-text">Домбай</p>
-                        <button class="rectangle__mesto-like"></button>
+                        <button class="rectangle__mesto-like opacity__like"></button>
                     </div>
                 </article>
 
@@ -53,7 +69,7 @@
                     <img class="rectangle__image" src="./images/pesel.png" alt="Гора Эльбрус"/>
                     <div class="rectangle__info">
                         <p class="rectangle__mesto-text">Гора Эльбрус</p>
-                        <button class="rectangle__mesto-like"></button>
+                        <button class="rectangle__mesto-like opacity__like"></button>
                     </div>
                 </article>
 
@@ -61,7 +77,7 @@
                     <img class="rectangle__image" src="./images/elbrus.png" alt="Домбай"/>
                     <div class="rectangle__info">
                         <p class="rectangle__mesto-text">Домбай</p>
-                        <button class="rectangle__mesto-like"></button>
+                        <button class="rectangle__mesto-like opacity__like"></button>
                     </div>
                 </article>
 
@@ -69,12 +85,16 @@
                     <img class="rectangle__image" src="./images/legobats.png" alt="Карачаево-Черкессия"/>
                     <div class="rectangle__info">
                         <p class="rectangle__mesto-text">Карачаево-Черкессия</p>
-                        <button class="rectangle__mesto-like"></button>
+                        <button class="rectangle__mesto-like opacity__like"></button>
                     </div>
                 </article>
-
             </section>
-            
+
+            <footer class="footer">
+                <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
+            </footer>
+
         </div>
+        <script src="./scripts/index.js"></script>
     </body>
 </html>
