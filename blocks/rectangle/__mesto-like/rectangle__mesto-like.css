@@ -10,4 +10,6 @@
     margin-top: 5px;
     margin-right: 5px;
     padding: 0;
+    outline: none;
+    cursor: pointer;
 }

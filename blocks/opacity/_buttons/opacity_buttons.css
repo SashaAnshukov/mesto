@@ -1,7 +1,7 @@
-.opacity__buttons {
+.opacity_buttons {
     transition: 0.55s;
 }
     
-.opacity__buttons:hover {
+.opacity_buttons:hover {
     opacity: 0.6;
 }
