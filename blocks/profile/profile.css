@@ -30,5 +30,7 @@
 @media screen and (max-width:767px) {
     .profile {
         flex-direction: column;
+        max-height: 282px;
+        margin-bottom: 36px;
     }
 }
