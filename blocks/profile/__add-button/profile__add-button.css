@@ -4,8 +4,9 @@
     border: 2px solid #FFFFFF;
     box-sizing: border-box;
     border-radius: 2px;
-    width: 150px;
+    min-width: 150px;
     min-height: 50px;
+    margin-left: 30px;
     align-self: center;
     padding: 0;
     outline: none;
@@ -15,6 +16,7 @@
 @media screen and (max-width: 767px) {
     .profile__add-button {
         margin-top: 36px;
-        width: 282px;
+        min-width: 282px;
+        margin-left: 0;
     }
 }

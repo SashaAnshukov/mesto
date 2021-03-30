@@ -1,5 +1,5 @@
 .header {
-    min-height: 74px;
+    /*min-height: 74px;*/
     display: flex;
     margin-top: 45px;
     margin-left: 200px;
@@ -28,6 +28,6 @@
     .header {
         margin-left: 0;
         margin-right: 0;
-        min-height: 56px;
+        /*min-height: 56px;*/
     }
 }

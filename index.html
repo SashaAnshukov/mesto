@@ -4,22 +4,22 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href="./pages/index.css" />
-        <title>Mesto Russia</title>
+        <title>Места</title>
     </head>
 
     <body class="page">
 
         <div class="popup">
             <div class="popup__overlay"></div>
-            <form class="popup__container">
-                    <div class="popup__close-button"></div>
-                    <p class="popup__name">Редактировать профиль</p>
-                    <div class="popup__input">
-                        <input type="text" value="" class="popup__title">
-                        <input type="text" value="" class="popup__subtitle">
-                    </div>
-                <button type ="submit" class="popup__button">Сохранить</button>
-            </form>
+            <div class="popup__container">
+                    <button type ="button" aria-label="close" class="popup__close-button opacity-buttons"></button>
+                    <h1 class="popup__name">Редактировать профиль</h1>
+                    <form name ="information" class="popup__information">
+                        <input type="text" name ="name" value="" class="popup__input popup__input_text_name">
+                        <input type="text" name ="profession" value="" class="popup__input popup__input_text_profession">
+                        <button type ="submit" aria-labelledby="popupSubmit" class="popup__button">Сохранить</button>
+                    </form>
+            </div>
         </div>
 
         <div class="page__container">
@@ -33,59 +33,59 @@
                     <img class="profile__avatar" src="./images/Avatar.png" alt="Фото Жака-Ива Кусто"/>
                     <div class="profile__info">
                         <h1 class="profile__title">Жак-Ив Кусто</h1>
-                        <button class="profile__edit-button opacity-buttons"></button>
-                        <h2 class="profile__subtitle">Исследователь океана</h2>
+                        <button type ="button" aria-label="edit" class="profile__edit-button opacity-buttons"></button>
+                        <p class="profile__subtitle">Исследователь океана</p>
                     </div>
                 </div>
-                <button class="profile__add-button opacity-buttons"></button>
+                <button type ="button" aria-label="add" class="profile__add-button opacity-buttons"></button>
             </section>
         
             <section class="elements">
                 <article class="rectangle">
                     <img class="rectangle__image" src="./images/Karachaevsk.jpg" alt="Карачаевск"/>
                     <div class="rectangle__info">
-                        <p class="rectangle__mesto-text">Карачаевск</p>
-                        <button class="rectangle__mesto-like opacity-like"></button>
+                        <h2 class="rectangle__mesto-text">Карачаевск</h2>
+                        <button type ="button" aria-label="like" class="rectangle__mesto-like opacity-like"></button>
                     </div>
                 </article>
             
                 <article class="rectangle">
                     <img class="rectangle__image" src="./images/batmansocks.jpg" alt="Гора Эльбрус"/>
                     <div class="rectangle__info">
-                        <p class="rectangle__mesto-text">Гора Эльбрус</p>
-                        <button class="rectangle__mesto-like opacity-like"></button>
+                        <h2 class="rectangle__mesto-text">Гора Эльбрус</h2>
+                        <button type ="button" aria-label="like" class="rectangle__mesto-like opacity-like"></button>
                     </div>
                 </article>
 
                 <article class="rectangle">
                     <img class="rectangle__image" src="./images/bats.png" alt="Домбай"/>
                     <div class="rectangle__info">
-                        <p class="rectangle__mesto-text">Домбай</p>
-                        <button class="rectangle__mesto-like opacity-like"></button>
+                        <h2 class="rectangle__mesto-text">Домбай</h2>
+                        <button type ="button" aria-label="like" class="rectangle__mesto-like opacity-like"></button>
                     </div>
                 </article>
 
                 <article class="rectangle">
                     <img class="rectangle__image" src="./images/pesel.png" alt="Гора Эльбрус"/>
                     <div class="rectangle__info">
-                        <p class="rectangle__mesto-text">Гора Эльбрус</p>
-                        <button class="rectangle__mesto-like opacity-like"></button>
+                        <h2 class="rectangle__mesto-text">Гора Эльбрус</h2>
+                        <button type ="button" aria-label="like" class="rectangle__mesto-like opacity-like"></button>
                     </div>
                 </article>
 
                 <article class="rectangle">
                     <img class="rectangle__image" src="./images/elbrus.png" alt="Домбай"/>
                     <div class="rectangle__info">
-                        <p class="rectangle__mesto-text">Домбай</p>
-                        <button class="rectangle__mesto-like opacity-like"></button>
+                        <h2 class="rectangle__mesto-text">Домбай</h2>
+                        <button type ="button" aria-label="like" class="rectangle__mesto-like opacity-like"></button>
                     </div>
                 </article>
 
                 <article class="rectangle">
                     <img class="rectangle__image" src="./images/legobats.png" alt="Карачаево-Черкессия"/>
                     <div class="rectangle__info">
-                        <p class="rectangle__mesto-text">Карачаево-Черкессия</p>
-                        <button class="rectangle__mesto-like opacity-like"></button>
+                        <h2 class="rectangle__mesto-text">Карачаево-Черкессия</h2>
+                        <button type ="button" aria-label="like" class="rectangle__mesto-like opacity-like"></button>
                     </div>
                 </article>
             </section>

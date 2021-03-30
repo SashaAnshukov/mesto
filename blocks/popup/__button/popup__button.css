@@ -10,10 +10,13 @@
     color: #FFFFFF;
     margin-left: 36px;
     margin-right: 36px;
+    margin-bottom: 37px;
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
     line-height: 22px;
+    cursor: pointer;
+    outline: none;
 }
 
 .popup__button:hover {
@@ -26,6 +29,8 @@
         min-height: 46px;
         font-size: 14px;
         line-height: 17px;
+        margin-left: 22px;
+        margin-right: 22px;
         margin-bottom: 25px;
     }
 }

@@ -6,6 +6,7 @@
     /*margin-top: -42px;
     margin-left: 430px;*/
     cursor: pointer;
+    outline: none;
     padding: 0;
     width: 40px;
     height: 40px;
@@ -15,7 +16,6 @@
 
 @media screen and (max-width: 650px) {
     .popup__close-button {
-        top: -41px;
         right: 7px;
         width: 26px;
         height: 26px;
