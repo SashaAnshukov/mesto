@@ -9,7 +9,7 @@
 
     <body class="page">
 
-        <div class="popup">
+        <div class="popup popup_type_edit">
             <div class="popup__overlay"></div>
             <div class="popup__container">
                     <button type ="button" aria-label="close" class="popup__close-button opacity-buttons"></button>
@@ -19,6 +19,30 @@
                         <input type="text" name ="profession" value="" class="popup__input popup__input_text_profession">
                         <button type ="submit" aria-label="saveButton" class="popup__button">Сохранить</button>
                     </form>
+            </div>
+        </div>
+
+        <div class="popup popup_type_add-card">
+            <div class="popup__overlay"></div>
+            <div class="popup__container">
+                    <button type ="button" aria-label="close" class="popup__close-button opacity-buttons"></button>
+                    <h2 class="popup__name">Новое место</h2>
+                    <form name ="information" class="popup__information">
+                        <input type="text" name ="namePlace" value="" placeholder = "Название" class="popup__input text-light popup__input_text_namePlace">
+                        <input type="text" name ="link" value="" placeholder = "Ссылка на катинку" class="popup__input text-light popup__input_text_link">
+                        <button type ="submit" aria-label="createButton" class="popup__button">Создать</button>
+                    </form>
+            </div>
+        </div>
+
+        <div class="popup popup_type_image">
+            <div class="popup__overlay"></div>
+            <div class="popup__container-image">
+                    <button type ="button" aria-label="close" class="popup__close-button opacity-buttons"></button>
+                    <figure>
+                        <img class = "popup__image" src = ""/>
+                        <figcaption class = "popup__image-caption"></figcaption>
+                    </figure>
             </div>
         </div>
 
@@ -41,53 +65,16 @@
             </section>
         
             <section class="elements">
-                <article class="rectangle">
-                    <img class="rectangle__image" src="./images/Karachaevsk.jpg" alt="Карачаевск"/>
-                    <div class="rectangle__info">
-                        <h2 class="rectangle__mesto-text">Карачаевск</h2>
-                        <button type ="button" aria-label="like" class="rectangle__mesto-like opacity-like"></button>
-                    </div>
-                </article>
-            
-                <article class="rectangle">
-                    <img class="rectangle__image" src="./images/batmansocks.jpg" alt="Гора Эльбрус"/>
-                    <div class="rectangle__info">
-                        <h2 class="rectangle__mesto-text">Гора Эльбрус</h2>
-                        <button type ="button" aria-label="like" class="rectangle__mesto-like opacity-like"></button>
-                    </div>
-                </article>
-
-                <article class="rectangle">
-                    <img class="rectangle__image" src="./images/bats.png" alt="Домбай"/>
-                    <div class="rectangle__info">
-                        <h2 class="rectangle__mesto-text">Домбай</h2>
-                        <button type ="button" aria-label="like" class="rectangle__mesto-like opacity-like"></button>
-                    </div>
-                </article>
-
-                <article class="rectangle">
-                    <img class="rectangle__image" src="./images/pesel.png" alt="Гора Эльбрус"/>
-                    <div class="rectangle__info">
-                        <h2 class="rectangle__mesto-text">Гора Эльбрус</h2>
-                        <button type ="button" aria-label="like" class="rectangle__mesto-like opacity-like"></button>
-                    </div>
-                </article>
-
-                <article class="rectangle">
-                    <img class="rectangle__image" src="./images/elbrus.png" alt="Домбай"/>
-                    <div class="rectangle__info">
-                        <h2 class="rectangle__mesto-text">Домбай</h2>
-                        <button type ="button" aria-label="like" class="rectangle__mesto-like opacity-like"></button>
-                    </div>
-                </article>
-
-                <article class="rectangle">
-                    <img class="rectangle__image" src="./images/legobats.png" alt="Карачаево-Черкессия"/>
-                    <div class="rectangle__info">
-                        <h2 class="rectangle__mesto-text">Карачаево-Черкессия</h2>
-                        <button type ="button" aria-label="like" class="rectangle__mesto-like opacity-like"></button>
-                    </div>
-                </article>
+                <template class="rectangle-item-template">
+                    <article class="rectangle">
+                        <img class="rectangle__image" src="./images/Karachaevsk.jpg" alt="Карачаевск"/>
+                        <button type ="button" aria-label="trash" class="rectangle__trash"></button>
+                        <div class="rectangle__info">
+                            <h2 class="rectangle__mesto-text">Карачаевск</h2>
+                            <button type ="button" aria-label="like" class="rectangle__mesto-like opacity-like"></button>
+                        </div>
+                    </article>
+                </template>
             </section>
 
             <footer class="footer">

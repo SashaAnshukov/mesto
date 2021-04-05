@@ -1,7 +1,5 @@
 .rectangle__image {
     object-fit: cover;
-    background-size: cover;
-    /*object-fit: contain;*/
-    /*object-fit: scale-down;*/
-    width: 100%;
+    width: 282px;
+    height: 282px;
 }

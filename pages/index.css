@@ -15,6 +15,8 @@
 @import url('../blocks/opacity-buttons/opacity-buttons.css');
 @import url('../blocks/opacity-like/opacity-like.css');
 
+@import url('../blocks/text-light/text-light.css');
+
 @import url('../blocks/page/page.css');
 @import url('../blocks/page/__container/page__container.css');
 
@@ -34,8 +36,10 @@
 @import url('../blocks/elements/elements.css');
 @import url('../blocks/rectangle/rectangle.css');
 @import url('../blocks/rectangle/__image/rectangle__image.css');
+@import url('../blocks/rectangle/__trash/rectangle__trash.css');
 @import url('../blocks/rectangle/__info/rectangle__info.css');
 @import url('../blocks/rectangle/__mesto-text/rectangle__mesto-text.css');
 @import url('../blocks/rectangle/__mesto-like/rectangle__mesto-like.css');
+@import url('../blocks/rectangle/__mesto-like/_active/rectangle__mesto-like_active.css');
 
 @import url('../blocks/footer/__copyright/footer__copyright.css');
