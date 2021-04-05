@@ -135,16 +135,15 @@ function formSubmitHandler2 (evt) {
 function fullImagePopup (event) {
     //inputValueaddCardnamePlace = addCardnamePlace.value;
     //inputValueaddCardlink = addCardlink.value;
-    const rectangleItem = rectangleItemTemplate.cloneNode(true);
+    const infoOnClick = event.target.closest('.rectangle');
     //const rectangleItemText =  rectangleItem.querySelector('.popup__image-caption');
     const popupFullImage =  rectangleItem.querySelector('.popup__image');
     //rectangleItemText.textContent = inputAddnamePlace;
-    popupFullImage.src = event.target.src;
+    popupFullImage.src = event.target.closest('.rectangle').src;
     /*rectangleItemImage.addEventListener('click', function (evt) {
         evt.target.img = inputAddLink.src;
     });*/
-
-    openImagePopup.classList.remove('popup_visible');
+    togglePopupWindow(openImagePopup);
 }
 /*element.addEventListener('click', function (evt) {
     evt.target.classList.toggle('rectangle__mesto-like_active');
