@@ -28,8 +28,8 @@
                     <button type ="button" aria-label="close" class="popup__close-button opacity-buttons"></button>
                     <h2 class="popup__name">Новое место</h2>
                     <form name ="information" class="popup__information">
-                        <input type="text" name ="namePlace" value="" placeholder = "Название" class="popup__input text-light popup__input_text_namePlace">
-                        <input type="text" name ="link" value="" placeholder = "Ссылка на катинку" class="popup__input text-light popup__input_text_link">
+                        <input type="text" name ="namePlace" value="" placeholder = "Название" class="popup__input popup__input_text_namePlace">
+                        <input type="text" name ="link" value="" placeholder = "Ссылка на катинку" class="popup__input popup__input_text_link">
                         <button type ="submit" aria-label="createButton" class="popup__button">Создать</button>
                     </form>
             </div>
@@ -37,11 +37,11 @@
 
         <div class="popup popup_type_image">
             <div class="popup__overlay"></div>
-            <div class="popup__container-image">
-                    <button type ="button" aria-label="close" class="popup__close-button opacity-buttons"></button>
-                    <figure>
-                        <img class = "popup__image" src = ""/>
-                        <figcaption class = "popup__image-caption"></figcaption>
+            <div class="popup__container_forImage">
+                    <figure class ='popup__figure'>
+                        <button type ="button" aria-label="close" class="popup__close-button popup__close-button_forImage opacity-buttons"></button>
+                        <img class ="popup__figure-image" src = "./images/Karachaevsk.jpg"/>
+                        <figcaption class ="popup__figure-caption"></figcaption>
                     </figure>
             </div>
         </div>
@@ -68,7 +68,7 @@
                 <template class="rectangle-item-template">
                     <article class="rectangle">
                         <img class="rectangle__image" src="./images/Karachaevsk.jpg" alt="Карачаевск"/>
-                        <button type ="button" aria-label="trash" class="rectangle__trash"></button>
+                        <button type ="button" aria-label="trash" class="rectangle__trash opacity-buttons"></button>
                         <div class="rectangle__info">
                             <h2 class="rectangle__mesto-text">Карачаевск</h2>
                             <button type ="button" aria-label="like" class="rectangle__mesto-like opacity-like"></button>

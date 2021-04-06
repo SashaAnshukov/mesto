@@ -1,0 +1,20 @@
+.popup__container_forImage {
+    position: relative;
+    max-width: 75vw;
+    max-height: 75vh;
+    margin-left: auto;
+    margin-right: auto;
+    /*top: 195px;
+    left: 50%;
+    transform: translateX(-50%);*/
+    /*min-height: 330px;*/
+    z-index: 1001;
+}
+
+@media screen and (max-width: 650px) {
+    .popup__container_forImage {
+        /*margin-top: 123px;*/
+        /*max-width: 282px;*/
+        /*min-height: 322px;*/
+    }
+}
