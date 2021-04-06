@@ -52,7 +52,7 @@ const imagePopupCaption = openImagePopup.querySelector('.popup__figure-caption')
 //
 const popupOverlay = document.querySelector('.popup__overlay');
 const popupContainer = popup.querySelector('.popup__container');
-const popupContainerImage = popup.querySelector('.popup__container-image');
+const popupContainerImage = popup.querySelector('.popup__container-forImage');
 const profileTitle = document.querySelector('.profile__title');
 const profileSubTitle = document.querySelector('.profile__subtitle');
 const popupTitle = document.querySelector('.popup__input_text_name');

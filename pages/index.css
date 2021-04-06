@@ -5,7 +5,7 @@
 @import url('../blocks/popup/_visible/popup_visible.css');
 @import url('../blocks/popup/__overlay/popup__overlay.css');
 @import url('../blocks/popup/__container/popup__container.css');
-@import url('../blocks/popup/__container/_forImage/popup__container_forImage.css');
+@import url('../blocks/popup/__container-forImage/popup__container-forImage.css');
 @import url('../blocks/popup/__name/popup__name.css');
 @import url('../blocks/popup/__input/popup__input.css');
 @import url('../blocks/popup/__title/popup__title.css');
