@@ -158,8 +158,8 @@ initialCards.forEach((item) => {
 // Функция формы добавления новой карточки
 function formSubmitHandlerAddCard (evt) {
     evt.preventDefault(); 
-    inputAddnamePlace = addCardnamePlace.value;
-    inputAddLink = addCardlink.value;
+    const inputAddnamePlace = addCardnamePlace.value;
+    const inputAddLink = addCardlink.value;
     //const cardItems = {name: inputAddnamePlace, link: inputAddLink};
     const newCard = createNewCard(inputAddnamePlace, inputAddLink);
     //const newCard = createNewCard(cardItems);

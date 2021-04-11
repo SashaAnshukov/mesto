@@ -14,9 +14,9 @@
             <div class="popup__container">
                     <button type ="button" aria-label="close" class="popup__close-button opacity-buttons"></button>
                     <h2 class="popup__name">Редактировать профиль</h2>
-                    <form name ="information" class="popup__information">
-                        <input type="text" name ="name" value="" class="popup__input popup__input_text_name">
-                        <input type="text" name ="profession" value="" class="popup__input popup__input_text_profession">
+                    <form novalidate name ="information" class="popup__form">
+                        <input required minlength="2" maxlength="40" type="text" name ="name" value="" class="popup__input popup__input_text_name">
+                        <input required minlength="2" maxlength="200" type="text" name ="profession" value="" class="popup__input popup__input_text_profession">
                         <button type ="submit" aria-label="saveButton" class="popup__button">Сохранить</button>
                     </form>
             </div>
@@ -27,9 +27,9 @@
             <div class="popup__container">
                     <button type ="button" aria-label="close" class="popup__close-button opacity-buttons"></button>
                     <h2 class="popup__name">Новое место</h2>
-                    <form name ="information" class="popup__information">
-                        <input type="text" name ="namePlace" value="" placeholder = "Название" class="popup__input popup__input_text_namePlace">
-                        <input type="text" name ="link" value="" placeholder = "Ссылка на катинку" class="popup__input popup__input_text_link">
+                    <form novalidate name ="information" class="popup__form">
+                        <input required minlength="1" maxlength="30" type="text" name ="namePlace" value="" placeholder = "Название" class="popup__input popup__input_text_namePlace">
+                        <input required type="url" name ="link" value="" placeholder = "Ссылка на катинку" class="popup__input popup__input_text_link">
                         <button type ="submit" aria-label="createButton" class="popup__button">Создать</button>
                     </form>
             </div>
@@ -83,5 +83,6 @@
 
         </div>
         <script src="./scripts/index.js"></script>
+        <script src="./scripts/validate.js"></script>
     </body>
 </html>
