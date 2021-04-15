@@ -26,7 +26,6 @@ const initialCards = [
     }
 ]; 
 
-const popup = document.querySelector('.popup');
 const element = document.querySelector('.elements');
 const rectangleItemTemplate = document.querySelector('.rectangle-item-template').content.querySelector('.rectangle');
 
@@ -46,13 +45,14 @@ const closeAddPopupButton = addCardPopup.querySelector('.popup__close-button');
 const closeImagePopupButton = openImagePopup.querySelector('.popup__close-button');
 
 // Постянные popup image
-const imagePopupImage = openImagePopup.querySelector('.popup__figure-image');
-const imagePopupCaption = openImagePopup.querySelector('.popup__figure-caption');
+const popupFullImageCaption =  document.querySelector('.popup__figure-caption');
+const popupFullImage =  document.querySelector('.popup__figure-image');
 
 // Постоянные popup'a и overlay
 const popupOverlay = document.querySelector('.popup__overlay');
-const popupContainer = popup.querySelector('.popup__container');
-const popupContainerImage = popup.querySelector('.popup__container-forImage');
+const popupEditContainer = editPopup.querySelector('.popup__container');
+const popupAddContainer = addCardPopup.querySelector('.popup__container');
+const popupContainerImage = openImagePopup.querySelector('.popup__container-forImage');
 const profileTitle = document.querySelector('.profile__title');
 const profileSubTitle = document.querySelector('.profile__subtitle');
 const popupTitle = document.querySelector('.popup__input_text_name');
@@ -69,78 +69,61 @@ function formSubmitHandler (evt) {
     evt.preventDefault(); 
     profileTitle.textContent = popupTitle.value;
     profileSubTitle.textContent = popupSubTitle.value;
-    popup.classList.remove('popup_visible');
+    editPopup.classList.remove('popup_visible');
 }
-
-// Функция открытия по клику на картинку
-function fullImagePopup (event) {
-    const allInfoOnClick = event.target.closest('.rectangle');
-    const titleOnClick = allInfoOnClick.querySelector('.rectangle__mesto-text');
-    const popupFullImageCaption =  document.querySelector('.popup__figure-caption');
-    const popupFullImage =  document.querySelector('.popup__figure-image');
-    popupFullImageCaption.textContent = titleOnClick.textContent;
-    popupFullImage.src = event.target.src;
-    togglePopupWindow(openImagePopup);
-};
 
 // Функция like
 function likeButton (evt) {
     evt.target.classList.toggle('rectangle__mesto-like_active');
 };
 
+// Функция создания новой карточки
+function createNewCard(item) {
+    const rectangleItem = rectangleItemTemplate.cloneNode(true);
+    const rectangleItemText =  rectangleItem.querySelector('.rectangle__mesto-text');
+    const rectangleItemImage =  rectangleItem.querySelector('.rectangle__image');
+    const trashButton = rectangleItem.querySelector('.rectangle__trash');
+    rectangleItemText.textContent = item.name;
+    rectangleItemImage.src = item.link;
+    rectangleItemImage.alt = item.name;
+    rectangleItem.querySelector('.rectangle__mesto-like').addEventListener('click', likeButton);
+    trashButton.addEventListener('click', () => {
+        rectangleItem.remove()
+    });
+    // Функция открытия по клику на картинку
+    rectangleItemImage.addEventListener ('click', () => {
+        popupFullImageCaption.textContent = rectangleItemImage.alt;
+        popupFullImage.src = rectangleItemImage.src;
+        togglePopupWindow(openImagePopup);
+    });
+    return rectangleItem;
+}
+
+//Добавление клонированных карточек с данными из массива
+initialCards.forEach((item) => {
+    const generateCard = createNewCard(item);
+    element.prepend(generateCard);
+});
+
 // Функция формы добавления новой карточки
 function formSubmitHandlerAddCard (evt) {
     evt.preventDefault(); 
     const inputAddnamePlace = addCardnamePlace.value;
     const inputAddLink = addCardlink.value;
-    const rectangleItem = rectangleItemTemplate.cloneNode(true);
-    const rectangleItemText =  rectangleItem.querySelector('.rectangle__mesto-text');
-    const rectangleItemImage =  rectangleItem.querySelector('.rectangle__image');
-    const trashButton = rectangleItem.querySelector('.rectangle__trash');
-    rectangleItemText.textContent = inputAddnamePlace;
-    rectangleItemImage.src = inputAddLink;
-    rectangleItemImage.alt = inputAddnamePlace;
-    element.prepend(rectangleItem);
+    const cardItems = {name: inputAddnamePlace, link: inputAddLink};
+    //const newCard = createNewCard(inputAddnamePlace, inputAddLink);
+    const newCard = createNewCard(cardItems);
+    
     addCardnamePlace.value = "";
     addCardlink.value = "";
-
-    rectangleItemImage.addEventListener ('click', fullImagePopup);
-    
-    rectangleItem.querySelector('.rectangle__mesto-like').addEventListener('click', likeButton);
-
-    trashButton.addEventListener('click', () => {
-        rectangleItem.remove()
-    });
-
-    addCardPopup.classList.remove('popup_visible');
+    element.prepend(newCard);
+    togglePopupWindow(addCardPopup);
 }
 
 //Обработчики форм редактирования профиля и добавления новой карточки
-popupContainer.addEventListener('submit', formSubmitHandler); 
+popupEditContainer.addEventListener('submit', formSubmitHandler); 
+popupAddContainer.addEventListener('submit', formSubmitHandler); 
 addCardPopup.addEventListener('submit', formSubmitHandlerAddCard);
-
-//Функция карточки Template: Клонирование, удаление через кнопку trash
-initialCards.forEach((item) => {
-    const rectangleItem = rectangleItemTemplate.cloneNode(true);
-    const rectangleItemText =  rectangleItem.querySelector('.rectangle__mesto-text');
-    const rectangleItemImage =  rectangleItem.querySelector('.rectangle__image');
-    const trashButton = rectangleItem.querySelector('.rectangle__trash');
-    
-    rectangleItemText.textContent = item.name;
-    rectangleItemImage.src = item.link;
-    rectangleItemImage.alt = item.name;
-    element.prepend(rectangleItem);
-    
-    rectangleItem.querySelector('.rectangle__mesto-like').addEventListener('click', likeButton);
-
-    trashButton.addEventListener('click', () => {
-        rectangleItem.remove()
-    });
-    
-    rectangleItemImage.addEventListener ('click', fullImagePopup);
-    
-    return rectangleItem;
-});
 
 // Функция открытия/закрытия попапа
 function togglePopupWindow (popup) {
@@ -150,7 +133,6 @@ function togglePopupWindow (popup) {
 //Открытие/закртытие карточкек редактирования профиля/добавления карточки, с функцией 
 openEditPopupButton.addEventListener('click', () => 
     togglePopupWindow(editPopup),
-    inputAddnamePlace = addCardnamePlace.value,
     popupTitle.value = profileTitle.textContent,
     popupSubTitle.value = profileSubTitle.textContent,
 );
