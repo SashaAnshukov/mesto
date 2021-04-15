@@ -26,7 +26,7 @@ const initialCards = [
     }
 ]; 
 
-const popup = document.querySelector('.popup');
+//const popup = document.querySelector('.popup');
 const element = document.querySelector('.elements');
 const rectangleItemTemplate = document.querySelector('.rectangle-item-template').content.querySelector('.rectangle');
 
@@ -51,8 +51,9 @@ const popupFullImage =  document.querySelector('.popup__figure-image');
 
 // Постоянные popup'a и overlay
 const popupOverlay = document.querySelector('.popup__overlay');
-const popupContainer = popup.querySelector('.popup__container');
-const popupContainerImage = popup.querySelector('.popup__container-forImage');
+const popupEditContainer = editPopup.querySelector('.popup__container');
+const popupAddContainer = addCardPopup.querySelector('.popup__container');
+const popupContainerImage = openImagePopup.querySelector('.popup__container-forImage');
 const profileTitle = document.querySelector('.profile__title');
 const profileSubTitle = document.querySelector('.profile__subtitle');
 const popupTitle = document.querySelector('.popup__input_text_name');
@@ -69,7 +70,7 @@ function formSubmitHandler (evt) {
     evt.preventDefault(); 
     profileTitle.textContent = popupTitle.value;
     profileSubTitle.textContent = popupSubTitle.value;
-    popup.classList.remove('popup_visible');
+    editPopup.classList.remove('popup_visible');
 }
 
 // Функция открытия по клику на картинку
@@ -94,7 +95,6 @@ function formSubmitHandler (evt) {
 function likeButton (evt) {
     evt.target.classList.toggle('rectangle__mesto-like_active');
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function createNewCard(item) {
     const rectangleItem = rectangleItemTemplate.cloneNode(true);
@@ -117,8 +117,6 @@ function createNewCard(item) {
     return rectangleItem;
 }
 
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////
 /*function createNewCard(name, link) {
     const inputAddnamePlace = addCardnamePlace.value;
     const inputAddLink = addCardlink.value
@@ -138,8 +136,8 @@ function createNewCard(item) {
     element.prepend(rectangleItem);*/
 
     /*rectangleItemImage.addEventListener ('click', getFullImagePopup);
-    rectangleItem.querySelector('.rectangle__mesto-like').addEventListener('click', likeButton);////////
-    trashButton.addEventListener('click', () => {///////////////////////////////////////////////////////
+    rectangleItem.querySelector('.rectangle__mesto-like').addEventListener('click', likeButton);
+    trashButton.addEventListener('click', () => {
         rectangleItem.remove()
     });
     element.prepend(rectangleItem);
@@ -160,9 +158,9 @@ function formSubmitHandlerAddCard (evt) {
     evt.preventDefault(); 
     const inputAddnamePlace = addCardnamePlace.value;
     const inputAddLink = addCardlink.value;
-    //const cardItems = {name: inputAddnamePlace, link: inputAddLink};
-    const newCard = createNewCard(inputAddnamePlace, inputAddLink);
-    //const newCard = createNewCard(cardItems);
+    const cardItems = {name: inputAddnamePlace, link: inputAddLink};
+    //const newCard = createNewCard(inputAddnamePlace, inputAddLink);
+    const newCard = createNewCard(cardItems);
     
     addCardnamePlace.value = "";
     addCardlink.value = "";
@@ -171,10 +169,9 @@ function formSubmitHandlerAddCard (evt) {
 }
 
 //Обработчики форм редактирования профиля и добавления новой карточки
-popupContainer.addEventListener('submit', formSubmitHandler); 
+popupEditContainer.addEventListener('submit', formSubmitHandler); 
+popupAddContainer.addEventListener('submit', formSubmitHandler); 
 addCardPopup.addEventListener('submit', formSubmitHandlerAddCard);
-
-
 
 // Функция открытия/закрытия попапа
 function togglePopupWindow (popup) {
@@ -184,7 +181,6 @@ function togglePopupWindow (popup) {
 //Открытие/закртытие карточкек редактирования профиля/добавления карточки, с функцией 
 openEditPopupButton.addEventListener('click', () => 
     togglePopupWindow(editPopup),
-    //inputAddnamePlace = addCardnamePlace.value,
     popupTitle.value = profileTitle.textContent,
     popupSubTitle.value = profileSubTitle.textContent,
 );
