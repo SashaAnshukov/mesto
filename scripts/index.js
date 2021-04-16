@@ -69,7 +69,7 @@ function formSubmitHandler (evt) {
     evt.preventDefault(); 
     profileTitle.textContent = popupTitle.value;
     profileSubTitle.textContent = popupSubTitle.value;
-    editPopup.classList.remove('popup_visible');
+    togglePopupWindow(editPopup);
 }
 
 // Функция like
@@ -122,8 +122,7 @@ function formSubmitHandlerAddCard (evt) {
 
 //Обработчики форм редактирования профиля и добавления новой карточки
 popupEditContainer.addEventListener('submit', formSubmitHandler); 
-popupAddContainer.addEventListener('submit', formSubmitHandler); 
-addCardPopup.addEventListener('submit', formSubmitHandlerAddCard);
+popupAddContainer.addEventListener('submit', formSubmitHandlerAddCard);
 
 // Функция открытия/закрытия попапа
 function togglePopupWindow (popup) {
