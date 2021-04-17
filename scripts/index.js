@@ -70,7 +70,7 @@ function formSubmitHandler (evt) {
     evt.preventDefault(); 
     profileTitle.textContent = popupTitle.value;
     profileSubTitle.textContent = popupSubTitle.value;
-    editPopup.classList.remove('popup_visible');
+    togglePopupWindow(editPopup);
 }
 
 // Функция открытия по клику на картинку
@@ -166,12 +166,13 @@ function formSubmitHandlerAddCard (evt) {
     addCardlink.value = "";
     element.prepend(newCard);
     togglePopupWindow(addCardPopup);
+    closePopup(addCardPopup);
 }
 
 //Обработчики форм редактирования профиля и добавления новой карточки
 popupEditContainer.addEventListener('submit', formSubmitHandler); 
-popupAddContainer.addEventListener('submit', formSubmitHandler); 
-addCardPopup.addEventListener('submit', formSubmitHandlerAddCard);
+//popupAddContainer.addEventListener('submit', formSubmitHandler); 
+popupAddContainer.addEventListener('submit', formSubmitHandlerAddCard);
 
 // Функция открытия/закрытия попапа
 function togglePopupWindow (popup) {
@@ -198,3 +199,44 @@ closeAddPopupButton.addEventListener('click', () =>
 closeImagePopupButton.addEventListener('click', () =>
     togglePopupWindow(openImagePopup)
 );
+
+/*function closePopup (event) {
+    //const popupOverlays = document.querySelectorAll('.popup__overlay');
+    if (event.target === event.currentTarget) {
+        console.log(event.target);
+        const openedPopup = document.querySelector('.popup_visible');
+        togglePopupWindow(openedPopup);
+    };
+};*/
+
+popupOverlay.addEventListener('click', (event) => {
+    //const popupOverlays = document.querySelectorAll('.popup__overlay');
+    if (event.target === event.currentTarget) {
+        console.log(event.target);
+        const openedPopup = document.querySelector('.popup_visible');
+        togglePopupWindow(openedPopup);
+    };
+});
+
+//addCardPopup.addEventListener('click', closePopup);
+//openImagePopup.addEventListener('click', closePopup);
+
+/*function closePopup(popup) {
+    popup.classList.remove('.popup_visible');
+}*/
+//popupOverlay.addEventListener('click', closePopup);
+
+/*function closeOnOverlay () {
+    const allPopups = Array.from(document.querySelectorAll('.popup'));
+    
+}*/
+
+
+
+/*const closeOnOverlay = () => {
+    //находим все формы на сранице
+    const allPopups = Array.from(document.querySelectorAll('.popup__form'));
+    
+    console.log(allPopups);
+    allPopups.forEach();
+};*/
