@@ -1,18 +1,20 @@
 console.log('вороны москвички');
 
-//функция пояления ошибки. Подсвечивает инпут нужным классом и показывать текст ошибки
+//функция пояления ошибки. Подсвечивает инпут нужным классом и показывает текст ошибки
 const showInputError = (inputElement, errorMessage) => {
     console.log(inputElement.name, errorMessage);
-    const errorElement = inputElement.closest('.popup__label').querySelector('.popup__input-error');
+    const errorElement = inputElement.closest('.popup__label').querySelector(validationMassive.spanInputErrorClass);
     errorElement.textContent = errorMessage;
-    errorElement.classList.add('popup__input-error_active');
+    errorElement.classList.add(validationMassive.popupErrorClass);
+    inputElement.classList.add(validationMassive.popuplineError);
 }
 
-//функция скытия ошибки
+//функция скрытия ошибки
 const hideInputError = (inputElement) => {
-    const errorElement = inputElement.closest('.popup__label').querySelector('.popup__input-error');
+    const errorElement = inputElement.closest('.popup__label').querySelector(validationMassive.spanInputErrorClass);
     errorElement.textContent = "";
-    errorElement.classList.remove('popup__input-error_active');
+    errorElement.classList.remove(validationMassive.popupErrorClass);
+    inputElement.classList.remove(validationMassive.popuplineError);
 }
 
 //функция проверки валидности инпута по длине и type
@@ -24,7 +26,7 @@ const checkInputValidity = (formElement, inputElement) => {
         const errorMessage = inputElement.validationMessage;
         showInputError(inputElement, errorMessage);
     } 
-    //если валмден, то скрываем ошибку
+    //если валиден, то скрываем ошибку
     else {
         hideInputError(inputElement);
     }
@@ -45,11 +47,11 @@ const toggleButtonState = (inputList, buttonElement) => {
 }
 
 //функция, которая приимает на вход формы и устанавливает обработчики
-const setEventListeners = (formElement, InputSelecor,submitButtonSelector) => {
+const setEventListeners = (formElement) => {
     //получим список инпутов
-    const inputList = Array.from(formElement.querySelectorAll(InputSelecor));
+    const inputList = Array.from(formElement.querySelectorAll(validationMassive.popupInputSelector));
     //найдём кнопку
-    const buttonElement = formElement.querySelector(submitButtonSelector);
+    const buttonElement = formElement.querySelector(validationMassive.submitButtonSelector);
     console.log(inputList);
 
     //повесим событие ввода на инпут
@@ -68,21 +70,24 @@ const setEventListeners = (formElement, InputSelecor,submitButtonSelector) => {
 };
 
 //функция валидации
-const enableValidation = ({
-    formSelector, InputSelecor, submitButtonSelector
-}) => {
+const enableValidation = (obj) => {
     //находим все формы на сранице
-    const formList = Array.from(document.querySelectorAll(formSelector));
+    const formList = Array.from(document.querySelectorAll(obj.popupFormSelector));
     
     console.log(formList);
     formList.forEach((formElement) => {
-        setEventListeners(formElement, InputSelecor, submitButtonSelector)
+        setEventListeners(formElement)
     });
 };
 
-enableValidation({
-    formSelector: '.popup__form',
-    InputSelecor: '.popup__input',
+const validationMassive = {
+    popupFormSelector: '.popup__form',
+    popupInputSelector: '.popup__input',
     submitButtonSelector: '.popup__button',
-    inputErrorClass: '.popup__input-error',
-});
+    spanInputErrorClass: '.popup__input-error',
+    popupErrorClass: 'popup__input-error_active',
+    popuplineError:'popup__input_type_error'
+}
+
+enableValidation(validationMassive);
+

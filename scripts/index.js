@@ -166,7 +166,6 @@ function formSubmitHandlerAddCard (evt) {
     addCardlink.value = "";
     element.prepend(newCard);
     togglePopupWindow(addCardPopup);
-    closePopup(addCardPopup);
 }
 
 //Обработчики форм редактирования профиля и добавления новой карточки
@@ -200,23 +199,70 @@ closeImagePopupButton.addEventListener('click', () =>
     togglePopupWindow(openImagePopup)
 );
 
-/*function closePopup (event) {
-    //const popupOverlays = document.querySelectorAll('.popup__overlay');
-    if (event.target === event.currentTarget) {
+const formPopup = document.querySelector('.popup__form');
+const popupOverlays = document.querySelectorAll('.popup__overlay');
+console.log(popupOverlays);
+
+//Функция закрытия попапа по overlay
+function closePopupOnOverlay (event) {
+    const getPopupOverlayOnClick = event.target.closest('.popup__overlay');
+    //const PopupOnClick = allInfoOnClick.querySelector('.popup_form');
+    if (event.target == getPopupOverlayOnClick) {
         console.log(event.target);
         const openedPopup = document.querySelector('.popup_visible');
         togglePopupWindow(openedPopup);
     };
-};*/
+};
 
-popupOverlay.addEventListener('click', (event) => {
+document.addEventListener('click', closePopupOnOverlay);
+//addCardPopup.addEventListener('click', closePopupOnOverlay);
+//openImagePopup.addEventListener('click', closePopupOnOverlay);
+
+//Функция закрытия попапа по Esc
+function closePopupOnEcs (event) {
+    if (event.key == 'Escape') {
+        console.log(event.key);
+        const openedPopup = document.querySelector('.popup_visible');
+        togglePopupWindow(openedPopup);
+    };
+};
+
+document.addEventListener('keydown', closePopupOnEcs);
+//addCardPopup.addEventListener('keydown', closePopupOnEcs);
+//openImagePopup.addEventListener('keydown', closePopupOnEcs);
+
+/*const allOverlay = Array.from(document.querySelectorAll('.popup__overlay'));
+console.log(allOverlay);*/
+
+/*addCardPopup.addEventListener('click', (event) => {
     //const popupOverlays = document.querySelectorAll('.popup__overlay');
-    if (event.target === event.currentTarget) {
+    
+    if (event.target != editPopup || addCardPopup || openImagePopup) {
+        console.log(event.target);
+        const openedPopup = document.querySelector('.popup_visible');
+        togglePopupWindow(openedPopup);
+    };
+});*/
+
+/*addCardPopup.addEventListener('click', (event) => {
+    //const popupOverlays = document.querySelectorAll('.popup__overlay');
+    
+    if (event.target != addCardPopup) {
         console.log(event.target);
         const openedPopup = document.querySelector('.popup_visible');
         togglePopupWindow(openedPopup);
     };
 });
+
+openImagePopup.addEventListener('click', (event) => {
+    //const popupOverlays = document.querySelectorAll('.popup__overlay');
+    
+    if (event.target != openImagePopup) {
+        console.log(event.target);
+        const openedPopup = document.querySelector('.popup_visible');
+        togglePopupWindow(openedPopup);
+    };
+});*/
 
 //addCardPopup.addEventListener('click', closePopup);
 //openImagePopup.addEventListener('click', closePopup);

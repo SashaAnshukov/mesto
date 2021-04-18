@@ -15,6 +15,7 @@
     line-height: 17px;
     padding: 0 0 13px 0;
     border: none;
+    outline: none;
     border-bottom: 1px solid rgba(0,0,0,.2);
 }
 
@@ -26,14 +27,14 @@
 @media screen and (max-width: 650px) {
     .popup__input {
         min-width: 238px;
-        margin-top: 75px;
+        margin-top: 0;
         margin-left: 22px;
         margin-right: 22px;
     }
 }
 
-@media screen and (max-width: 650px) {
+/*@media screen and (max-width: 650px) {
     .popup__input:nth-last-child(2) {
         margin-bottom: 45px;
     }
-}
+}*/

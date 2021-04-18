@@ -16,12 +16,14 @@
                     <h2 class="popup__name">Редактировать профиль</h2>
                     <form novalidate name ="profile" class="popup__form">
                         <label class="popup__label">
-                            <input required minlength="2" maxlength="40" type="text" name ="name" value="" class="popup__input popup__input_text_name">
-                            <span class="popup__input-error"  id="profile-name-error"></span>
+                            <input required minlength="2" maxlength="40" type="text"
+                            name ="name" value="" class="popup__input popup__input_text_name">
+                            <span class="popup__input-error"></span>
                         </label>
                         <label class="popup__label">
-                            <input required minlength="2" maxlength="200" type="text" name ="profession" value="" class="popup__input popup__input_text_profession">
-                            <span class="popup__input-error"  id="profile-profession-error"></span>
+                            <input required minlength="2" maxlength="200" type="text"
+                            name ="profession" value="" class="popup__input popup__input_text_profession">
+                            <span class="popup__input-error"></span>
                         </label>
                         <button type ="submit" aria-label="saveButton" class="popup__button popup__button_invalid">Сохранить</button>
                     </form>
@@ -35,12 +37,15 @@
                     <h2 class="popup__name">Новое место</h2>
                     <form novalidate name ="newPlace" class="popup__form">
                         <label class="popup__label">
-                            <input required minlength="1" maxlength="30" type="text" name ="namePlace" value="" placeholder = "Название" class="popup__input popup__input_text_namePlace">
-                            <span class="popup__input-error"  id="newPlace-namePlace-error"></span>
+                            <input required minlength="1" maxlength="30" type="text"
+                            name ="namePlace" value="" placeholder = "Название"
+                            class="popup__input popup__input_text_namePlace">
+                            <span class="popup__input-error"></span>
                         </label>
                         <label class="popup__label">    
-                            <input required type="url" name ="link" value="" placeholder = "Ссылка на катинку" class="popup__input popup__input_text_link">
-                            <span class="popup__input-error"  id="newPlace-link-error"></span>
+                            <input required type="url" name ="link" value=""
+                            placeholder = "Ссылка на катинку" class="popup__input popup__input_text_link">
+                            <span class="popup__input-error"></span>
                         </label>
                         <button type ="submit" aria-label="createButton" class="popup__button popup__button_invalid">Создать</button>
                     </form>

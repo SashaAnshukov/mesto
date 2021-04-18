@@ -9,6 +9,7 @@
 @import url('../blocks/popup/__name/popup__name.css');
 @import url('../blocks/popup/__label/popup__label.css');
 @import url('../blocks/popup/__input/popup__input.css');
+@import url('../blocks/popup/__input/_type_error/popup__input_type_error.css');
 @import url('../blocks/popup/__input-error/popup__input-error.css');
 @import url('../blocks/popup/__input-error/_active/popup__input-error_active.css');
 @import url('../blocks/popup/__title/popup__title.css');

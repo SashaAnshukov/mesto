@@ -10,3 +10,14 @@
     margin-top: 30px;
     margin-bottom: 48px;
 }
+
+@media screen and (max-width: 650px) {
+    .popup__label {
+        margin-top: 75px;
+    }
+
+    .popup__label:nth-last-child(2) {
+        margin-bottom: 45px;
+    }
+
+}
