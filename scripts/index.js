@@ -26,7 +26,6 @@ const initialCards = [
     }
 ]; 
 
-//const popup = document.querySelector('.popup');
 const element = document.querySelector('.elements');
 const rectangleItemTemplate = document.querySelector('.rectangle-item-template').content.querySelector('.rectangle');
 
@@ -73,24 +72,6 @@ function formSubmitHandler (evt) {
     togglePopupWindow(editPopup);
 }
 
-// Функция открытия по клику на картинку
-/*function getFullImagePopup (event) {
-    const allInfoOnClick = event.target.closest('.rectangle');
-    const titleOnClick = allInfoOnClick.querySelector('.rectangle__mesto-text');
-    popupFullImageCaption.textContent = titleOnClick.textContent;
-    popupFullImage.src = event.target.src;
-    togglePopupWindow(openImagePopup);
-};*/
-
-/*function getFullImagePopup (image) {
-    rectangle__image.addEventListener('click', () => {
-    popupFullImageCaption = image.alt;
-    popupFullImage = image.src;
-    togglePopupWindow(openImagePopup);
-    });
-}*/
-
-
 // Функция like
 function likeButton (evt) {
     evt.target.classList.toggle('rectangle__mesto-like_active');
@@ -116,36 +97,6 @@ function createNewCard(item) {
     });
     return rectangleItem;
 }
-
-/*function createNewCard(name, link) {
-    const inputAddnamePlace = addCardnamePlace.value;
-    const inputAddLink = addCardlink.value
-    const rectangleItem = rectangleItemTemplate.cloneNode(true);
-    const rectangleItemText =  rectangleItem.querySelector('.rectangle__mesto-text');
-    const rectangleItemImage =  rectangleItem.querySelector('.rectangle__image');
-    const trashButton = rectangleItem.querySelector('.rectangle__trash');
-    
-    rectangleItemText.textContent = item.name;
-    rectangleItemImage.src = item.link;
-    rectangleItemImage.alt = item.name;
-    element.prepend(rectangleItem);
-
-    /*rectangleItemText.textContent = inputAddnamePlace;
-    rectangleItemImage.src = inputAddLink;
-    rectangleItemImage.alt = inputAddnamePlace;
-    element.prepend(rectangleItem);*/
-
-    /*rectangleItemImage.addEventListener ('click', getFullImagePopup);
-    rectangleItem.querySelector('.rectangle__mesto-like').addEventListener('click', likeButton);
-    trashButton.addEventListener('click', () => {
-        rectangleItem.remove()
-    });
-    element.prepend(rectangleItem);
-    return rectangleItem;
-}*/
-
-/*const newCard = createNewCard(inputAddnamePlace, inputAddLink);
-element.prepend(newCard);*/
 
 //Добавление клонированных карточек с данными из массива
 initialCards.forEach((item) => {
@@ -215,8 +166,6 @@ function closePopupOnOverlay (event) {
 };
 
 document.addEventListener('click', closePopupOnOverlay);
-//addCardPopup.addEventListener('click', closePopupOnOverlay);
-//openImagePopup.addEventListener('click', closePopupOnOverlay);
 
 //Функция закрытия попапа по Esc
 function closePopupOnEcs (event) {
@@ -228,61 +177,3 @@ function closePopupOnEcs (event) {
 };
 
 document.addEventListener('keydown', closePopupOnEcs);
-//addCardPopup.addEventListener('keydown', closePopupOnEcs);
-//openImagePopup.addEventListener('keydown', closePopupOnEcs);
-
-/*const allOverlay = Array.from(document.querySelectorAll('.popup__overlay'));
-console.log(allOverlay);*/
-
-/*addCardPopup.addEventListener('click', (event) => {
-    //const popupOverlays = document.querySelectorAll('.popup__overlay');
-    
-    if (event.target != editPopup || addCardPopup || openImagePopup) {
-        console.log(event.target);
-        const openedPopup = document.querySelector('.popup_visible');
-        togglePopupWindow(openedPopup);
-    };
-});*/
-
-/*addCardPopup.addEventListener('click', (event) => {
-    //const popupOverlays = document.querySelectorAll('.popup__overlay');
-    
-    if (event.target != addCardPopup) {
-        console.log(event.target);
-        const openedPopup = document.querySelector('.popup_visible');
-        togglePopupWindow(openedPopup);
-    };
-});
-
-openImagePopup.addEventListener('click', (event) => {
-    //const popupOverlays = document.querySelectorAll('.popup__overlay');
-    
-    if (event.target != openImagePopup) {
-        console.log(event.target);
-        const openedPopup = document.querySelector('.popup_visible');
-        togglePopupWindow(openedPopup);
-    };
-});*/
-
-//addCardPopup.addEventListener('click', closePopup);
-//openImagePopup.addEventListener('click', closePopup);
-
-/*function closePopup(popup) {
-    popup.classList.remove('.popup_visible');
-}*/
-//popupOverlay.addEventListener('click', closePopup);
-
-/*function closeOnOverlay () {
-    const allPopups = Array.from(document.querySelectorAll('.popup'));
-    
-}*/
-
-
-
-/*const closeOnOverlay = () => {
-    //находим все формы на сранице
-    const allPopups = Array.from(document.querySelectorAll('.popup__form'));
-    
-    console.log(allPopups);
-    allPopups.forEach();
-};*/

@@ -20,7 +20,6 @@ const hideInputError = (inputElement) => {
 //функция проверки валидности инпута по длине и type
 const checkInputValidity = (formElement, inputElement) => {
     const isInputNotValid = !inputElement.validity.valid;
-    //console.log(isInputNotValid);
     //если не валиден, то показываем ошибку
     if (isInputNotValid) {
         const errorMessage = inputElement.validationMessage;
