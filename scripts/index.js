@@ -17,7 +17,6 @@ const closeEditPopupButton = editPopup.querySelector('.popup__close-button');
 const closeAddPopupButton = addCardPopup.querySelector('.popup__close-button');
 const closeImagePopupButton = openImagePopup.querySelector('.popup__close-button');
 
-
 // Постянные popup image
 const popupFullImageCaption =  document.querySelector('.popup__figure-caption');
 const popupFullImage =  document.querySelector('.popup__figure-image');
