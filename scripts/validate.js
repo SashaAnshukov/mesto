@@ -1,7 +1,7 @@
 console.log('вороны москвички');
 
 //функция пояления ошибки. Подсвечивает инпут нужным классом и показывает текст ошибки
-const showInputError = (inputElement, errorMessage) => {
+const showInputError = (inputElement, errorMessage, validationMassive) => {
     console.log(inputElement.name, errorMessage);
     const errorElement = inputElement.closest('.popup__label').querySelector(validationMassive.spanInputErrorClass);
     errorElement.textContent = errorMessage;
@@ -10,7 +10,7 @@ const showInputError = (inputElement, errorMessage) => {
 }
 
 //функция скрытия ошибки
-const hideInputError = (inputElement) => {
+const hideInputError = (inputElement, validationMassive) => {
     const errorElement = inputElement.closest('.popup__label').querySelector(validationMassive.spanInputErrorClass);
     errorElement.textContent = "";
     errorElement.classList.remove(validationMassive.popupErrorClass);
@@ -23,11 +23,11 @@ const checkInputValidity = (formElement, inputElement) => {
     //если не валиден, то показываем ошибку
     if (isInputNotValid) {
         const errorMessage = inputElement.validationMessage;
-        showInputError(inputElement, errorMessage);
+        showInputError(inputElement, errorMessage, validationMassive);
     } 
     //если валиден, то скрываем ошибку
     else {
-        hideInputError(inputElement);
+        hideInputError(inputElement,validationMassive);
     }
 };
 
@@ -46,7 +46,7 @@ const toggleButtonState = (inputList, buttonElement) => {
 }
 
 //функция, которая приимает на вход формы и устанавливает обработчики
-const setEventListeners = (formElement) => {
+const setEventListeners = (formElement, validationMassive) => {
     //получим список инпутов
     const inputList = Array.from(formElement.querySelectorAll(validationMassive.popupInputSelector));
     //найдём кнопку
@@ -69,13 +69,13 @@ const setEventListeners = (formElement) => {
 };
 
 //функция валидации
-const enableValidation = (obj) => {
+const enableValidation = (validationMassive) => {
     //находим все формы на сранице
-    const formList = Array.from(document.querySelectorAll(obj.popupFormSelector));
+    const formList = Array.from(document.querySelectorAll(validationMassive.popupFormSelector));
     
     console.log(formList);
     formList.forEach((formElement) => {
-        setEventListeners(formElement)
+        setEventListeners(formElement, validationMassive)
     });
 };
 

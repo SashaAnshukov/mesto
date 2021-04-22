@@ -28,6 +28,7 @@ const initialCards = [
 
 const element = document.querySelector('.elements');
 const rectangleItemTemplate = document.querySelector('.rectangle-item-template').content.querySelector('.rectangle');
+const EscapeKey = 'Escape';
 
 // Постянные для модальных окон
 const editPopup = document.querySelector('.popup_type_edit');
@@ -37,19 +38,20 @@ const openImagePopup = document.querySelector('.popup_type_image');
 // Постянные для кнопок открытия модальных окон
 const openEditPopupButton = document.querySelector('.profile__edit-button');
 const openAddPopupButton = document.querySelector('.profile__add-button');
-const openImageButton = document.querySelector('.profile__add-button');
+//const openImageButton = document.querySelector('.profile__add-button');
 
 // Постянные для кнопок закрытия модальных окон
 const closeEditPopupButton = editPopup.querySelector('.popup__close-button');
 const closeAddPopupButton = addCardPopup.querySelector('.popup__close-button');
 const closeImagePopupButton = openImagePopup.querySelector('.popup__close-button');
 
+
 // Постянные popup image
 const popupFullImageCaption =  document.querySelector('.popup__figure-caption');
 const popupFullImage =  document.querySelector('.popup__figure-image');
 
-// Постоянные popup'a и overlay
-const popupOverlay = document.querySelector('.popup__overlay');
+// Постоянные popup'a 
+//const popupOverlay = document.querySelector('.popup__overlay');
 const popupEditContainer = editPopup.querySelector('.popup__container');
 const popupAddContainer = addCardPopup.querySelector('.popup__container');
 const popupContainerImage = openImagePopup.querySelector('.popup__container-forImage');
@@ -59,13 +61,14 @@ const popupTitle = document.querySelector('.popup__input_text_name');
 const popupSubTitle = document.querySelector('.popup__input_text_profession');
 const addCardnamePlace = document.querySelector('.popup__input_text_namePlace');
 const addCardlink = document.querySelector('.popup__input_text_link');
+//const popupButton = document.querySelector('.popup__button');
 
 // выбираю класс с наведением
 const noTransitionCloseEditPopupButton = editPopup.querySelector('.popup__close-button, .opacity-buttons');
 const noTransitionCloseAddPopupButton = addCardPopup.querySelector('.popup__close-button, .opacity-buttons');
 
 // Функция формы редактирования профиля
-function formSubmitHandler (evt) {
+function submitProfileForm (evt) {
     evt.preventDefault(); 
     profileTitle.textContent = popupTitle.value;
     profileSubTitle.textContent = popupSubTitle.value;
@@ -104,37 +107,47 @@ initialCards.forEach((item) => {
     element.prepend(generateCard);
 });
 
+//Функция деактивации кнопки создания карточки
+function setButtonDisabled () {
+    const buttonAddCard = document.querySelector('[aria-label="createButton"]');
+    console.log (buttonAddCard);
+    buttonAddCard.setAttribute('disabled', true);
+}
+
 // Функция формы добавления новой карточки
-function formSubmitHandlerAddCard (evt) {
+function submitAddCardForm (evt) {
+    
     evt.preventDefault(); 
     const inputAddnamePlace = addCardnamePlace.value;
     const inputAddLink = addCardlink.value;
     const cardItems = {name: inputAddnamePlace, link: inputAddLink};
-    //const newCard = createNewCard(inputAddnamePlace, inputAddLink);
     const newCard = createNewCard(cardItems);
-    
     addCardnamePlace.value = "";
     addCardlink.value = "";
     element.prepend(newCard);
+    setButtonDisabled();
     togglePopupWindow(addCardPopup);
 }
 
 //Обработчики форм редактирования профиля и добавления новой карточки
-popupEditContainer.addEventListener('submit', formSubmitHandler); 
-//popupAddContainer.addEventListener('submit', formSubmitHandler); 
-popupAddContainer.addEventListener('submit', formSubmitHandlerAddCard);
+popupEditContainer.addEventListener('submit', submitProfileForm);
 
-// Функция открытия/закрытия попапа
+//popupAddContainer.addEventListener('submit', formSubmitHandler); 
+popupAddContainer.addEventListener('submit', submitAddCardForm);
+
+// Функция открытия/закрытия попапа cо слушателями закрытия по overlay и Esc
 function togglePopupWindow (popup) {
     popup.classList.toggle('popup_visible');
+    document.addEventListener('click', closePopupOnOverlay);
+    document.addEventListener('keydown', closePopupOnEcs);
 }
 
 //Открытие/закртытие карточкек редактирования профиля/добавления карточки, с функцией 
-openEditPopupButton.addEventListener('click', () => 
-    togglePopupWindow(editPopup),
-    popupTitle.value = profileTitle.textContent,
-    popupSubTitle.value = profileSubTitle.textContent,
-);
+openEditPopupButton.addEventListener('click', () => {
+    togglePopupWindow(editPopup);
+    popupTitle.value = profileTitle.textContent;
+    popupSubTitle.value = profileSubTitle.textContent;
+});
 openAddPopupButton.addEventListener('click', () => togglePopupWindow(addCardPopup));
 
 //Слушатели кнопок закрытия
@@ -150,9 +163,9 @@ closeImagePopupButton.addEventListener('click', () =>
     togglePopupWindow(openImagePopup)
 );
 
-const formPopup = document.querySelector('.popup__form');
+/*const formPopup = document.querySelector('.popup__form');
 const popupOverlays = document.querySelectorAll('.popup__overlay');
-console.log(popupOverlays);
+console.log(popupOverlays);*/
 
 //Функция закрытия попапа по overlay
 function closePopupOnOverlay (event) {
@@ -165,15 +178,11 @@ function closePopupOnOverlay (event) {
     };
 };
 
-document.addEventListener('click', closePopupOnOverlay);
-
 //Функция закрытия попапа по Esc
 function closePopupOnEcs (event) {
-    if (event.key == 'Escape') {
+    if (event.key == EscapeKey) {
         console.log(event.key);
         const openedPopup = document.querySelector('.popup_visible');
         togglePopupWindow(openedPopup);
     };
-};
-
-document.addEventListener('keydown', closePopupOnEcs);
+}
