@@ -18,7 +18,7 @@ const hideInputError = (inputElement, validationMassive) => {
 }
 
 //функция проверки валидности инпута по длине и type
-const checkInputValidity = (formElement, inputElement) => {
+const checkInputValidity = (formElement, inputElement, validationMassive) => {
     const isInputNotValid = !inputElement.validity.valid;
     //если не валиден, то показываем ошибку
     if (isInputNotValid) {
@@ -58,7 +58,7 @@ const setEventListeners = (formElement, validationMassive) => {
 
         const handleInput = () => {
             //проверяем валидность инпута
-            checkInputValidity(formElement, inputElement);
+            checkInputValidity(formElement, inputElement, validationMassive);
             // переключаем состояние кнопки
             toggleButtonState(inputList, buttonElement);
         }

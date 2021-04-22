@@ -1,31 +1,3 @@
-// Массив с картинками
-const initialCards = [
-    {
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-        name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-        name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-        name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-]; 
-
 const element = document.querySelector('.elements');
 const rectangleItemTemplate = document.querySelector('.rectangle-item-template').content.querySelector('.rectangle');
 const EscapeKey = 'Escape';
@@ -61,7 +33,7 @@ const popupTitle = document.querySelector('.popup__input_text_name');
 const popupSubTitle = document.querySelector('.popup__input_text_profession');
 const addCardnamePlace = document.querySelector('.popup__input_text_namePlace');
 const addCardlink = document.querySelector('.popup__input_text_link');
-//const popupButton = document.querySelector('.popup__button');
+const buttonAddCard = document.querySelector('[aria-label="createButton"]');
 
 // выбираю класс с наведением
 const noTransitionCloseEditPopupButton = editPopup.querySelector('.popup__close-button, .opacity-buttons');
@@ -108,8 +80,7 @@ initialCards.forEach((item) => {
 });
 
 //Функция деактивации кнопки создания карточки
-function setButtonDisabled () {
-    const buttonAddCard = document.querySelector('[aria-label="createButton"]');
+function setButtonDisabled (buttonAddCard) {
     console.log (buttonAddCard);
     buttonAddCard.setAttribute('disabled', true);
 }
@@ -125,7 +96,7 @@ function submitAddCardForm (evt) {
     addCardnamePlace.value = "";
     addCardlink.value = "";
     element.prepend(newCard);
-    setButtonDisabled();
+    setButtonDisabled(buttonAddCard);
     togglePopupWindow(addCardPopup);
 }
 
@@ -138,8 +109,13 @@ popupAddContainer.addEventListener('submit', submitAddCardForm);
 // Функция открытия/закрытия попапа cо слушателями закрытия по overlay и Esc
 function togglePopupWindow (popup) {
     popup.classList.toggle('popup_visible');
-    document.addEventListener('click', closePopupOnOverlay);
-    document.addEventListener('keydown', closePopupOnEcs);
+    if (popup.classList.contains('popup_visible')) {
+        document.addEventListener('click', closePopupOnOverlay);
+        document.addEventListener('keydown', closePopupOnEcs);
+    } else {
+        document.removeEventListener('click', closePopupOnOverlay);
+        document.removeEventListener('keydown', closePopupOnEcs);
+    }
 }
 
 //Открытие/закртытие карточкек редактирования профиля/добавления карточки, с функцией 
