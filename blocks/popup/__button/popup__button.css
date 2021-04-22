@@ -23,6 +23,15 @@
     background-color: rgba(0,0,0,.8);
 }
 
+.popup__button:disabled {
+    background-color: #FFFFFF;
+    color: #000000;
+    border: 1px solid #000000;
+    opacity: 0.2;
+    pointer-events: none;
+    /*-webkit-user-select: none;*/
+}
+
 @media screen and (max-width: 650px) {
     .popup__button {
         min-width: 238px;

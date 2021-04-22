@@ -9,43 +9,6 @@
 
     <body class="page">
 
-        <div class="popup popup_type_edit">
-            <div class="popup__overlay"></div>
-            <div class="popup__container">
-                    <button type ="button" aria-label="close" class="popup__close-button opacity-buttons"></button>
-                    <h2 class="popup__name">Редактировать профиль</h2>
-                    <form name ="information" class="popup__information">
-                        <input type="text" name ="name" value="" class="popup__input popup__input_text_name">
-                        <input type="text" name ="profession" value="" class="popup__input popup__input_text_profession">
-                        <button type ="submit" aria-label="saveButton" class="popup__button">Сохранить</button>
-                    </form>
-            </div>
-        </div>
-
-        <div class="popup popup_type_add-card">
-            <div class="popup__overlay"></div>
-            <div class="popup__container">
-                    <button type ="button" aria-label="close" class="popup__close-button opacity-buttons"></button>
-                    <h2 class="popup__name">Новое место</h2>
-                    <form name ="information" class="popup__information">
-                        <input type="text" name ="namePlace" value="" placeholder = "Название" class="popup__input popup__input_text_namePlace">
-                        <input type="text" name ="link" value="" placeholder = "Ссылка на катинку" class="popup__input popup__input_text_link">
-                        <button type ="submit" aria-label="createButton" class="popup__button">Создать</button>
-                    </form>
-            </div>
-        </div>
-
-        <div class="popup popup_type_image">
-            <div class="popup__overlay"></div>
-            <div class="popup__container-forImage">
-                    <figure class ='popup__figure'>
-                        <button type ="button" aria-label="close" class="popup__close-button popup__close-button_forImage opacity-buttons"></button>
-                        <img class ="popup__figure-image" src = "./images/Karachaevsk.jpg" alt="Здесь должно быть изображение"/>
-                        <figcaption class ="popup__figure-caption"></figcaption>
-                    </figure>
-            </div>
-        </div>
-
         <div class="page__container">
 
             <header class="header">
@@ -82,6 +45,63 @@
             </footer>
 
         </div>
+
+        <div class="popup popup_type_edit">
+            <div class="popup__overlay"></div>
+            <div class="popup__container">
+                    <button type ="button" aria-label="close" class="popup__close-button opacity-buttons"></button>
+                    <h2 class="popup__name">Редактировать профиль</h2>
+                    <form novalidate name ="profile" class="popup__form">
+                        <label class="popup__label">
+                            <input required minlength="2" maxlength="40" type="text"
+                            name ="name" value="" class="popup__input popup__input_text_name">
+                            <span class="popup__input-error"></span>
+                        </label>
+                        <label class="popup__label">
+                            <input required minlength="2" maxlength="200" type="text"
+                            name ="profession" value="" class="popup__input popup__input_text_profession">
+                            <span class="popup__input-error"></span>
+                        </label>
+                        <button type ="submit" aria-label="saveButton" class="popup__button popup__button_invalid">Сохранить</button>
+                    </form>
+            </div>
+        </div>
+
+        <div class="popup popup_type_add-card">
+            <div class="popup__overlay"></div>
+            <div class="popup__container">
+                    <button type ="button" aria-label="close" class="popup__close-button opacity-buttons"></button>
+                    <h2 class="popup__name">Новое место</h2>
+                    <form novalidate name ="newPlace" class="popup__form">
+                        <label class="popup__label">
+                            <input required minlength="1" maxlength="30" type="text"
+                            name ="namePlace" value="" placeholder = "Название"
+                            class="popup__input popup__input_text_namePlace">
+                            <span class="popup__input-error"></span>
+                        </label>
+                        <label class="popup__label">    
+                            <input required type="url" name ="link" value=""
+                            placeholder = "Ссылка на катинку" class="popup__input popup__input_text_link">
+                            <span class="popup__input-error"></span>
+                        </label>
+                        <button type ="submit" aria-label="createButton" class="popup__button popup__button_invalid">Создать</button>
+                    </form>
+            </div>
+        </div>
+
+        <div class="popup popup_type_image">
+            <div class="popup__overlay"></div>
+            <div class="popup__container-forImage">
+                    <figure class ='popup__figure'>
+                        <button type ="button" aria-label="close" class="popup__close-button popup__close-button_forImage opacity-buttons"></button>
+                        <img class ="popup__figure-image" src = "./images/Karachaevsk.jpg" alt="Здесь должно быть изображение"/>
+                        <figcaption class ="popup__figure-caption"></figcaption>
+                    </figure>
+            </div>
+        </div>
+
+        <script src="./scripts/initialCards.js"></script>
         <script src="./scripts/index.js"></script>
+        <script src="./scripts/validate.js"></script>
     </body>
 </html>
