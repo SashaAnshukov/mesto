@@ -1,3 +1,7 @@
+import {Card} from './Card.js';
+import {validationMassive} from './FormValidator.js';
+import {FormValidator} from './FormValidator.js';
+
 const element = document.querySelector('.elements');
 const rectangleItemTemplate = document.querySelector('.rectangle-item-template').content.querySelector('.rectangle');
 const EscapeKey = 'Escape';
@@ -38,15 +42,21 @@ const buttonAddCard = document.querySelector('[aria-label="createButton"]');
 const noTransitionCloseEditPopupButton = editPopup.querySelector('.popup__close-button, .opacity-buttons');
 const noTransitionCloseAddPopupButton = addCardPopup.querySelector('.popup__close-button, .opacity-buttons');
 
+const seteditPopupEnableValidation = new FormValidator (validationMassive, editPopup);
+seteditPopupEnableValidation.enableValidation();
+
+const setaddCardPopupEnableValidation = new FormValidator (validationMassive, addCardPopup);
+setaddCardPopupEnableValidation.enableValidation();
+
 // Функция формы редактирования профиля
 function submitProfileForm (evt) {
-    evt.preventDefault(); 
+    evt.preventDefault();
     profileTitle.textContent = popupTitle.value;
     profileSubTitle.textContent = popupSubTitle.value;
     togglePopupWindow(editPopup);
 }
 
-// Функция like
+/*// Функция like
 function likeButton (evt) {
     evt.target.classList.toggle('rectangle__mesto-like_active');
 };
@@ -70,12 +80,18 @@ function createNewCard(item) {
         togglePopupWindow(openImagePopup);
     });
     return rectangleItem;
-}
+}*/
 
 //Добавление клонированных карточек с данными из массива
 initialCards.forEach((item) => {
-    const generateCard = createNewCard(item);
-    element.prepend(generateCard);
+    /*const generateCard = createNewCard(item);
+    element.prepend(generateCard);*/
+    const card = new Card (item, '.rectangle-item-template');
+    const cardElement  = card.generateCard();
+    element.prepend(cardElement);
+    element.addEventListener ('click', () => {
+        togglePopupWindow(openImagePopup);
+    });;
 });
 
 //Функция деактивации кнопки создания карточки
@@ -86,15 +102,14 @@ function setButtonDisabled (buttonAddCard) {
 
 // Функция формы добавления новой карточки
 function submitAddCardForm (evt) {
-    
     evt.preventDefault(); 
     const inputAddnamePlace = addCardnamePlace.value;
     const inputAddLink = addCardlink.value;
     const cardItems = {name: inputAddnamePlace, link: inputAddLink};
-    const newCard = createNewCard(cardItems);
+    const newCard = new Card (cardItems, '.rectangle-item-template');
     addCardnamePlace.value = "";
     addCardlink.value = "";
-    element.prepend(newCard);
+    element.prepend(newCard.generateCard());
     setButtonDisabled(buttonAddCard);
     togglePopupWindow(addCardPopup);
 }

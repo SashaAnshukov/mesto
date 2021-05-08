@@ -89,4 +89,3 @@ const validationMassive = {
 }
 
 enableValidation(validationMassive);
-
