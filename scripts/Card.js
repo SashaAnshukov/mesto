@@ -6,10 +6,11 @@
 
 
 export class Card {
-    constructor (data, cardSelector) {
+    constructor (data, cardSelector, handleCardClick) {
         this._nameCard = data.name;
         this._linkCard = data.link;
         this._cardSelector = cardSelector;
+        this._handleCardClick = handleCardClick;
     }
 
     _getTemplate() {
@@ -41,7 +42,12 @@ export class Card {
 
     _setEventListeners() {
         this._element.querySelector('.rectangle__image')
-        .addEventListener('click', () => this._handleOpenImage());
+        .addEventListener('click', () => this._handleCardClick(this._nameCard, this._linkCard));
+        /*this._element = this._getTemplate();
+        this._cardImage = this._element.querySelector('.rectangle__image');
+        this._cardImage.addEventListener('click', () => {
+            this._handleCardClick(this._name, this._link)
+        });*/
 
         const buttonLikeElement = this._element.querySelector('.rectangle__mesto-like');
         buttonLikeElement.addEventListener('click', () => this._handleLike());
@@ -50,14 +56,14 @@ export class Card {
         buttonTrash.addEventListener('click', () => this._handleTrash());
     }
 
-    _handleOpenImage() {
+    /*_handleOpenImage() {
         const popupImage = document.querySelector('.popup__figure-image');
         const popupFullImageCaption =  document.querySelector('.popup__figure-caption');
         popupImage.src = this._linkCard;
         popupImage.alt = this._nameCard; 
         popupFullImageCaption.textContent = this._nameCard; 
         document.querySelector('.popup_type_image').classList.toggle('popup_visible');
-    }
+    }*/
 
     _handleLike() {
         this._element.querySelector('.rectangle__mesto-like').classList.toggle('rectangle__mesto-like_active')

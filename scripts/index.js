@@ -3,7 +3,7 @@ import {validationMassive} from './FormValidator.js';
 import {FormValidator} from './FormValidator.js';
 
 const element = document.querySelector('.elements');
-const rectangleItemTemplate = document.querySelector('.rectangle-item-template').content.querySelector('.rectangle');
+//const rectangleItemTemplate = document.querySelector('.rectangle-item-template').content.querySelector('.rectangle');
 const EscapeKey = 'Escape';
 
 // Постянные для модальных окон
@@ -42,11 +42,11 @@ const buttonAddCard = document.querySelector('[aria-label="createButton"]');
 const noTransitionCloseEditPopupButton = editPopup.querySelector('.popup__close-button, .opacity-buttons');
 const noTransitionCloseAddPopupButton = addCardPopup.querySelector('.popup__close-button, .opacity-buttons');
 
-const seteditPopupEnableValidation = new FormValidator (validationMassive, editPopup);
-seteditPopupEnableValidation.enableValidation();
+const editPopupValidator = new FormValidator (validationMassive, editPopup);
+editPopupValidator.enableValidation();
 
-const setaddCardPopupEnableValidation = new FormValidator (validationMassive, addCardPopup);
-setaddCardPopupEnableValidation.enableValidation();
+const addCardPopupValidator= new FormValidator (validationMassive, addCardPopup);
+addCardPopupValidator.enableValidation();
 
 // Функция формы редактирования профиля
 function submitProfileForm (evt) {
@@ -86,12 +86,11 @@ function createNewCard(item) {
 initialCards.forEach((item) => {
     /*const generateCard = createNewCard(item);
     element.prepend(generateCard);*/
-    const card = new Card (item, '.rectangle-item-template');
-    const cardElement  = card.generateCard();
+    const cardElement = createCard (item);
     element.prepend(cardElement);
-    element.addEventListener ('click', () => {
+    /*element.addEventListener ('click', () => {
         togglePopupWindow(openImagePopup);
-    });;
+    });;*/
 });
 
 //Функция деактивации кнопки создания карточки
@@ -106,10 +105,10 @@ function submitAddCardForm (evt) {
     const inputAddnamePlace = addCardnamePlace.value;
     const inputAddLink = addCardlink.value;
     const cardItems = {name: inputAddnamePlace, link: inputAddLink};
-    const newCard = new Card (cardItems, '.rectangle-item-template');
+    const newCard = createCard (cardItems);
     addCardnamePlace.value = "";
     addCardlink.value = "";
-    element.prepend(newCard.generateCard());
+    element.prepend(newCard);
     setButtonDisabled(buttonAddCard);
     togglePopupWindow(addCardPopup);
 }
@@ -175,4 +174,22 @@ function closePopupOnEcs (event) {
         const openedPopup = document.querySelector('.popup_visible');
         togglePopupWindow(openedPopup);
     };
+}
+
+// Функция открытия по клику на картинку
+function handleCardClick (name, link) {
+    //устанавливаем ссылку
+    popupFullImage.src = link;
+    //устанавливаем подпись картинке
+    popupFullImageCaption.textContent = name;
+    popupFullImage.alt = name;
+    //открываем попап универсальной функцией, которая навешивает обработчик Escape внутри себя
+    togglePopupWindow(openImagePopup);
+}
+
+//функция создания новой карточки 
+function createCard (data) {
+    const card = new Card (data, '.rectangle-item-template', handleCardClick);
+    const cardElement  = card.generateCard();
+    return cardElement
 }
