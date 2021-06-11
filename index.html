@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" href="./pages/index.css" />
+        <!--<link rel="stylesheet" href="./pages/index.css" />-->
         <title>Места</title>
     </head>
 
@@ -12,12 +12,12 @@
         <div class="page__container">
 
             <header class="header">
-                <img class="header__logo" src="./images/logo.svg" alt="логотип Mesto"/>
+                <img class="header__logo" src="<%require('./images/logo.svg')%>" alt="логотип Mesto"/>
             </header>
 
             <section class="profile">
                 <div class="profile__space">
-                    <img class="profile__avatar" src="./images/Avatar.png" alt="Фото Жака-Ива Кусто"/>
+                    <img class="profile__avatar" src="<%=require('./images/Avatar.png')%>" alt="Фото Жака-Ива Кусто"/>
                     <div class="profile__info">
                         <h1 class="profile__title">Жак-Ив Кусто</h1>
                         <button type ="button" aria-label="edit" class="profile__edit-button opacity-buttons"></button>
@@ -30,7 +30,7 @@
             <section class="elements">
                 <template class="rectangle-item-template">
                     <article class="rectangle">
-                        <img class="rectangle__image" src="./images/Karachaevsk.jpg" alt="Карачаевск"/>
+                        <img class="rectangle__image" src="<%=require('./images/Karachaevsk.jpg')%>" alt="Карачаевск"/>
                         <button type ="button" aria-label="trash" class="rectangle__trash opacity-buttons"></button>
                         <div class="rectangle__info">
                             <h2 class="rectangle__mesto-text">Карачаевск</h2>
@@ -94,13 +94,13 @@
             <div class="popup__container-forImage">
                     <figure class ='popup__figure'>
                         <button type ="button" aria-label="close" class="popup__close-button popup__close-button_forImage opacity-buttons"></button>
-                        <img class ="popup__figure-image" src = "./images/Karachaevsk.jpg" alt="Здесь должно быть изображение"/>
+                        <img class ="popup__figure-image" src = "<%=require('./images/Karachaevsk.jpg')%>" alt="Здесь должно быть изображение"/>
                         <figcaption class ="popup__figure-caption"></figcaption>
                     </figure>
             </div>
         </div>
 
-        <script src="./scripts/initialCards.js"></script>
+        <!--<script src="./scripts/initialCards.js"></script>-->
         <script type="module" src="./scripts/index.js"></script>
     </body>
 </html>

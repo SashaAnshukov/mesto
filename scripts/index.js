@@ -1,6 +1,11 @@
+console.log('Hello, World!')
 import {Card} from './Card.js';
 import {validationMassive} from './FormValidator.js';
 import {FormValidator} from './FormValidator.js';
+import '../pages/index.css'; // добавили импорт главного файла стилей
+import {initialCards} from './initialCards.js';
+//import {PopupWithImage} from './PopupWithImage.js';
+import Section from './Section.js';
 
 const element = document.querySelector('.elements');
 //const rectangleItemTemplate = document.querySelector('.rectangle-item-template').content.querySelector('.rectangle');
@@ -45,8 +50,49 @@ const noTransitionCloseAddPopupButton = addCardPopup.querySelector('.popup__clos
 const editPopupValidator = new FormValidator (validationMassive, editPopup);
 editPopupValidator.enableValidation();
 
-const addCardPopupValidator= new FormValidator (validationMassive, addCardPopup);
+const addCardPopupValidator = new FormValidator (validationMassive, addCardPopup);
 addCardPopupValidator.enableValidation();
+
+/*const openPopupWithImage = new PopupWithImage (openImagePopup);
+openPopupWithImage.togglePopupWindow();
+
+function addPopupWithImage() {
+    openPopupWithImage.togglePopupWindow();
+};*/
+
+//функция создания новой карточки 
+function createCard (data) {
+    //addPopupWithImage();
+    //openPopupWithImage.togglePopupWindow(data.name, data.link);
+    const card = new Card (data, '.rectangle-item-template', handleCardClick);
+    const cardElement  = card.generateCard();
+    return cardElement
+}
+
+const cardList = new Section({
+    item: initialCards,
+    renderer: (item) => {
+        const card = new Card (item, '.rectangle-item-template', handleCardClick);
+        const cardElement  = card.generateCard();
+        //initialCards.addItem(createCard(data));
+        cardList.addItem(cardElement);
+    },
+},
+    '.rectangle-item-template'
+);
+
+cardList.renderItems();
+
+//Добавление клонированных карточек с данными из массива
+/*initialCards.forEach((item) => {
+    /*const generateCard = createNewCard(item);
+    element.prepend(generateCard);*/
+    /*const cardElement = cardList (item);
+    element.prepend(cardElement);*/
+    /*element.addEventListener ('click', () => {
+        togglePopupWindow(openImagePopup);
+    });;*/
+/*});*/
 
 // Функция формы редактирования профиля
 function submitProfileForm (evt) {
@@ -81,17 +127,6 @@ function createNewCard(item) {
     });
     return rectangleItem;
 }*/
-
-//Добавление клонированных карточек с данными из массива
-initialCards.forEach((item) => {
-    /*const generateCard = createNewCard(item);
-    element.prepend(generateCard);*/
-    const cardElement = createCard (item);
-    element.prepend(cardElement);
-    /*element.addEventListener ('click', () => {
-        togglePopupWindow(openImagePopup);
-    });;*/
-});
 
 //Функция деактивации кнопки создания карточки
 function setButtonDisabled (buttonAddCard) {
@@ -187,9 +222,17 @@ function handleCardClick (name, link) {
     togglePopupWindow(openImagePopup);
 }
 
-//функция создания новой карточки 
-function createCard (data) {
-    const card = new Card (data, '.rectangle-item-template', handleCardClick);
-    const cardElement  = card.generateCard();
-    return cardElement
-}
+
+
+/*const userInfo = new UserInfo (
+    {
+        name: '.profile__name',
+        job: '.profile__job'
+    }
+)
+
+const editProfilePopup = new PopupWithForm ('...',);
+
+function editFormSubmitHandler (data) { // editFormSubmitHandler = _submitHandler из PopupWithForm????
+    userInfo.setUserInfo(data)
+}*/
