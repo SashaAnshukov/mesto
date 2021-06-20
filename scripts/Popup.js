@@ -1,5 +1,5 @@
 // отвечает за открытие и закрытие попапа
-/*export class Popup {
+export class Popup {
     constructor (popupSelector) {
         this._popup = document.querySelector(popupSelector);
         this._closePopupOnEcs = this._closePopupOnEcs.bind();
@@ -7,7 +7,7 @@
     }
 
     togglePopupWindow() {
-        this._popup.querySelector('.popup_type_image').сlassList.toggle('popup_visible');
+        this._popup.сlassList.toggle('popup_visible');
         document.addEventListener('keydown', this._closePopupOnEcs);
     }
 
@@ -16,7 +16,7 @@
         document.removeEventListener('keyup', this._closePopupOnEcs);
     }*/
 
-    /*// _handleEscClose
+    // _handleEscClose
     _closePopupOnEcs(event) { 
         if(event.key === 27) {
             this.togglePopupWindow();
@@ -24,9 +24,9 @@
     }
 
     setEventListeners() {
-        this._popup.querySelector('.popup__close-button').addEventListener(() => {
+        this._popup.querySelector('.popup__close-button').addEventListener('click', () => {
             this.togglePopupWindow();
         });
         //this._popup.addEventListener('click', this._closePopupOnOverlay());
     }
-}*/
+}

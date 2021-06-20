@@ -1,4 +1,4 @@
-const path = require('path'); // подключаем path к конфигу вебпак
+/*const path = require('path'); // подключаем path к конфигу вебпак
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // подключили плагин html
 const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // подключили плагин - удалять содержимое папки dist
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // подключили плагин css
@@ -64,4 +64,4 @@ module.exports = {
         new CleanWebpackPlugin(), // использовали плагин
         new MiniCssExtractPlugin() // подключение плагина для объединения файлов
     ]
-}
+}*/

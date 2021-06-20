@@ -2,9 +2,9 @@ console.log('Hello, World!')
 import {Card} from './Card.js';
 import {validationMassive} from './FormValidator.js';
 import {FormValidator} from './FormValidator.js';
-import '../pages/index.css'; // добавили импорт главного файла стилей
+//import '../pages/index.css'; // добавили импорт главного файла стилей
 import {initialCards} from './initialCards.js';
-//import {PopupWithImage} from './PopupWithImage.js';
+import {PopupWithImage} from './PopupWithImage.js';
 import Section from './Section.js';
 
 const element = document.querySelector('.elements');
@@ -53,10 +53,10 @@ editPopupValidator.enableValidation();
 const addCardPopupValidator = new FormValidator (validationMassive, addCardPopup);
 addCardPopupValidator.enableValidation();
 
-/*const openPopupWithImage = new PopupWithImage (openImagePopup);
-openPopupWithImage.togglePopupWindow();
+const openPopupWithImage = new PopupWithImage ('.popup_type_image');
+openPopupWithImage.setEventListeners();
 
-function addPopupWithImage() {
+/*function addPopupWithImage() {
     openPopupWithImage.togglePopupWindow();
 };*/
 
@@ -77,11 +77,24 @@ const cardList = new Section({
         //initialCards.addItem(createCard(data));
         cardList.addItem(cardElement);
     },
-},
-    '.rectangle-item-template'
+    },
+    '.elements'
 );
 
 cardList.renderItems();
+
+// Функция открытия по клику на картинку
+function handleCardClick (namePopup, linkPopup) {
+    /*//устанавливаем ссылку
+    popupFullImage.src = link;
+    //устанавливаем подпись картинке
+    popupFullImageCaption.textContent = name;
+    popupFullImage.alt = name;
+    //открываем попап универсальной функцией, которая навешивает обработчик Escape внутри себя
+    togglePopupWindow(openImagePopup);*/
+    openPopupWithImage.togglePopupWindow(namePopup, linkPopup);
+    openPopupWithImage.setEventListeners();
+}
 
 //Добавление клонированных карточек с данными из массива
 /*initialCards.forEach((item) => {
@@ -155,7 +168,7 @@ popupEditContainer.addEventListener('submit', submitProfileForm);
 popupAddContainer.addEventListener('submit', submitAddCardForm);
 
 // Функция открытия/закрытия попапа cо слушателями закрытия по overlay и Esc
-function togglePopupWindow (popup) {
+/*function togglePopupWindow (popup) {
     popup.classList.toggle('popup_visible');
     if (popup.classList.contains('popup_visible')) {
         document.addEventListener('click', closePopupOnOverlay);
@@ -164,7 +177,7 @@ function togglePopupWindow (popup) {
         document.removeEventListener('click', closePopupOnOverlay);
         document.removeEventListener('keydown', closePopupOnEcs);
     }
-}
+}*/
 
 //Открытие/закртытие карточкек редактирования профиля/добавления карточки, с функцией 
 openEditPopupButton.addEventListener('click', () => {
@@ -183,9 +196,9 @@ closeAddPopupButton.addEventListener('click', () =>
     togglePopupWindow(addCardPopup),
     noTransitionCloseAddPopupButton.classList.remove('opacity-buttons')
 );
-closeImagePopupButton.addEventListener('click', () =>
+/*closeImagePopupButton.addEventListener('click', () =>
     togglePopupWindow(openImagePopup)
-);
+);*/
 
 /*const formPopup = document.querySelector('.popup__form');
 const popupOverlays = document.querySelectorAll('.popup__overlay');
@@ -203,24 +216,15 @@ function closePopupOnOverlay (event) {
 };
 
 //Функция закрытия попапа по Esc
-function closePopupOnEcs (event) {
+/*function closePopupOnEcs (event) {
     if (event.key == EscapeKey) {
         console.log(event.key);
         const openedPopup = document.querySelector('.popup_visible');
         togglePopupWindow(openedPopup);
     };
-}
+}*/
 
-// Функция открытия по клику на картинку
-function handleCardClick (name, link) {
-    //устанавливаем ссылку
-    popupFullImage.src = link;
-    //устанавливаем подпись картинке
-    popupFullImageCaption.textContent = name;
-    popupFullImage.alt = name;
-    //открываем попап универсальной функцией, которая навешивает обработчик Escape внутри себя
-    togglePopupWindow(openImagePopup);
-}
+
 
 
 
