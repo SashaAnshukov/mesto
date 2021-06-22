@@ -6,8 +6,8 @@ export class Popup {
         //this._closePopupOnOverlay = this._closePopupOnOverlay.bind();
     }
 
-    togglePopupWindow() {
-        this._popup.сlassList.toggle('popup_visible');
+    open () {
+        this._popup.сlassList.add('popup_visible');
         document.addEventListener('keydown', this._closePopupOnEcs);
     }
 

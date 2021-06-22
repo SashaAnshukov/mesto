@@ -72,7 +72,7 @@ function createCard (data) {
 const cardList = new Section({
     item: initialCards,
     renderer: (item) => {
-        const card = new Card (item, '.rectangle-item-template', handleCardClick);
+        const card = new Card (item, '.rectangle-item-template', openPopupWithImage._handleCardClick.bind(openPopupWithImage));
         const cardElement  = card.generateCard();
         //initialCards.addItem(createCard(data));
         cardList.addItem(cardElement);
@@ -84,7 +84,7 @@ const cardList = new Section({
 cardList.renderItems();
 
 // Функция открытия по клику на картинку
-function handleCardClick (namePopup, linkPopup) {
+//function handleCardClick (namePopup, linkPopup) {
     /*//устанавливаем ссылку
     popupFullImage.src = link;
     //устанавливаем подпись картинке
@@ -92,9 +92,9 @@ function handleCardClick (namePopup, linkPopup) {
     popupFullImage.alt = name;
     //открываем попап универсальной функцией, которая навешивает обработчик Escape внутри себя
     togglePopupWindow(openImagePopup);*/
-    openPopupWithImage.togglePopupWindow(namePopup, linkPopup);
-    openPopupWithImage.setEventListeners();
-}
+    //openPopupWithImage.open(namePopup, linkPopup);
+    //openPopupWithImage.setEventListeners();
+//}
 
 //Добавление клонированных карточек с данными из массива
 /*initialCards.forEach((item) => {
