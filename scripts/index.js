@@ -56,15 +56,11 @@ addCardPopupValidator.enableValidation();
 const openPopupWithImage = new PopupWithImage ('.popup_type_image');
 openPopupWithImage.setEventListeners();
 
-/*function addPopupWithImage() {
-    openPopupWithImage.togglePopupWindow();
-};*/
-
 //функция создания новой карточки 
-function createCard (data) {
+function createCard (item, templateSelector) {
     //addPopupWithImage();
     //openPopupWithImage.togglePopupWindow(data.name, data.link);
-    const card = new Card (data, '.rectangle-item-template', handleCardClick);
+    const card = new Card (item, templateSelector, openPopupWithImage.handleCardClick.bind(openPopupWithImage));
     const cardElement  = card.generateCard();
     return cardElement
 }
@@ -72,10 +68,11 @@ function createCard (data) {
 const cardList = new Section({
     item: initialCards,
     renderer: (item) => {
-        const card = new Card (item, '.rectangle-item-template', openPopupWithImage._handleCardClick.bind(openPopupWithImage));
-        const cardElement  = card.generateCard();
+        //const card = new Card (item, '.rectangle-item-template', openPopupWithImage._handleCardClick.bind(openPopupWithImage));
+        const oneCard = createCard(item, '.rectangle-item-template');
+        //const cardElement  = card.generateCard();
         //initialCards.addItem(createCard(data));
-        cardList.addItem(cardElement);
+        cardList.addItem(oneCard);
     },
     },
     '.elements'
@@ -108,14 +105,14 @@ cardList.renderItems();
 /*});*/
 
 // Функция формы редактирования профиля
-function submitProfileForm (evt) {
+/*function submitProfileForm (evt) {
     evt.preventDefault();
     profileTitle.textContent = popupTitle.value;
     profileSubTitle.textContent = popupSubTitle.value;
     togglePopupWindow(editPopup);
 }
 
-/*// Функция like
+// Функция like
 function likeButton (evt) {
     evt.target.classList.toggle('rectangle__mesto-like_active');
 };
@@ -142,13 +139,13 @@ function createNewCard(item) {
 }*/
 
 //Функция деактивации кнопки создания карточки
-function setButtonDisabled (buttonAddCard) {
+/*function setButtonDisabled (buttonAddCard) {
     console.log (buttonAddCard);
     buttonAddCard.setAttribute('disabled', true);
-}
+}*/
 
 // Функция формы добавления новой карточки
-function submitAddCardForm (evt) {
+/*function submitAddCardForm (evt) {
     evt.preventDefault(); 
     const inputAddnamePlace = addCardnamePlace.value;
     const inputAddLink = addCardlink.value;
@@ -165,7 +162,7 @@ function submitAddCardForm (evt) {
 popupEditContainer.addEventListener('submit', submitProfileForm);
 
 //popupAddContainer.addEventListener('submit', formSubmitHandler); 
-popupAddContainer.addEventListener('submit', submitAddCardForm);
+popupAddContainer.addEventListener('submit', submitAddCardForm);*/
 
 // Функция открытия/закрытия попапа cо слушателями закрытия по overlay и Esc
 /*function togglePopupWindow (popup) {
@@ -180,22 +177,22 @@ popupAddContainer.addEventListener('submit', submitAddCardForm);
 }*/
 
 //Открытие/закртытие карточкек редактирования профиля/добавления карточки, с функцией 
-openEditPopupButton.addEventListener('click', () => {
+/*openEditPopupButton.addEventListener('click', () => {
     togglePopupWindow(editPopup);
     popupTitle.value = profileTitle.textContent;
     popupSubTitle.value = profileSubTitle.textContent;
 });
-openAddPopupButton.addEventListener('click', () => togglePopupWindow(addCardPopup));
+openAddPopupButton.addEventListener('click', () => togglePopupWindow(addCardPopup));*/
 
 //Слушатели кнопок закрытия
-closeEditPopupButton.addEventListener('click', () =>
+/*closeEditPopupButton.addEventListener('click', () =>
     togglePopupWindow(editPopup), 
     noTransitionCloseEditPopupButton.classList.remove('opacity-buttons')
 );
 closeAddPopupButton.addEventListener('click', () =>
     togglePopupWindow(addCardPopup),
     noTransitionCloseAddPopupButton.classList.remove('opacity-buttons')
-);
+);*/
 /*closeImagePopupButton.addEventListener('click', () =>
     togglePopupWindow(openImagePopup)
 );*/
@@ -205,7 +202,7 @@ const popupOverlays = document.querySelectorAll('.popup__overlay');
 console.log(popupOverlays);*/
 
 //Функция закрытия попапа по overlay
-function closePopupOnOverlay (event) {
+/*function closePopupOnOverlay (event) {
     const getPopupOverlayOnClick = event.target.closest('.popup__overlay');
     //const PopupOnClick = allInfoOnClick.querySelector('.popup_form');
     if (event.target == getPopupOverlayOnClick) {
@@ -213,7 +210,7 @@ function closePopupOnOverlay (event) {
         const openedPopup = document.querySelector('.popup_visible');
         togglePopupWindow(openedPopup);
     };
-};
+};*/
 
 //Функция закрытия попапа по Esc
 /*function closePopupOnEcs (event) {

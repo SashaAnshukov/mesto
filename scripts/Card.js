@@ -10,7 +10,7 @@ export class Card {
         this._nameCard = data.name;
         this._linkCard = data.link;
         this._cardSelector = cardSelector;
-        this._handleCardClick = handleCardClick;
+        this.handleCardClick = handleCardClick;
     }
 
     _getTemplate() {
@@ -42,7 +42,7 @@ export class Card {
 
     _setEventListeners() {
         this._element.querySelector('.rectangle__image')
-        .addEventListener('click', () => this._handleCardClick(this._nameCard, this._linkCard));
+        .addEventListener('click', () => this.handleCardClick(this._nameCard, this._linkCard));
         /*this._element = this._getTemplate();
         this._cardImage = this._element.querySelector('.rectangle__image');
         this._cardImage.addEventListener('click', () => {

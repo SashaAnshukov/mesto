@@ -7,7 +7,7 @@ export class Popup {
     }
 
     open () {
-        this._popup.сlassList.add('popup_visible');
+        this._popup.сlassList.toggle('popup_visible');
         document.addEventListener('keydown', this._closePopupOnEcs);
     }
 
@@ -19,13 +19,13 @@ export class Popup {
     // _handleEscClose
     _closePopupOnEcs(event) { 
         if(event.key === 27) {
-            this.togglePopupWindow();
+            this.open();
         }
     }
 
     setEventListeners() {
         this._popup.querySelector('.popup__close-button').addEventListener('click', () => {
-            this.togglePopupWindow();
+            this.open();
         });
         //this._popup.addEventListener('click', this._closePopupOnOverlay());
     }

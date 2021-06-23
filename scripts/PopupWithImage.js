@@ -9,7 +9,7 @@ export class PopupWithImage extends Popup {
         //this.togglePopupWindow(); 
     }
 
-    _handleCardClick (namePopup, linkPopup) {
+    handleCardClick (namePopup, linkPopup) {
         super.open();
         this._popup.querySelector('.popup__figure-caption').textContent = namePopup;
         this._popup.querySelector('.popup__figure-image').src = linkPopup;
