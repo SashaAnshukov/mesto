@@ -10,7 +10,7 @@ export class Card {
         this._nameCard = data.name;
         this._linkCard = data.link;
         this._cardSelector = cardSelector;
-        this.handleCardClick = handleCardClick;
+        this.handleCardClick = handleCardClick.bind();
     }
 
     _getTemplate() {

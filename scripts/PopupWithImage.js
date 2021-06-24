@@ -9,11 +9,11 @@ export class PopupWithImage extends Popup {
         //this.togglePopupWindow(); 
     }
 
-    handleCardClick (namePopup, linkPopup) {
+    handleCardClick (nameCard, linkCard) {
         super.open();
-        this._popup.querySelector('.popup__figure-caption').textContent = namePopup;
-        this._popup.querySelector('.popup__figure-image').src = linkPopup;
-        this._popup.querySelector('.popup__figure-image').alt = namePopup;
+        this._popup.querySelector('.popup__figure-caption').textContent = nameCard;
+        this._popup.querySelector('.popup__figure-image').src = linkCard;
+        this._popup.querySelector('.popup__figure-image').alt = nameCard;
     }
 }
 

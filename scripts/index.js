@@ -53,14 +53,16 @@ editPopupValidator.enableValidation();
 const addCardPopupValidator = new FormValidator (validationMassive, addCardPopup);
 addCardPopupValidator.enableValidation();
 
-const openPopupWithImage = new PopupWithImage ('.popup_type_image');
-openPopupWithImage.setEventListeners();
+
 
 //функция создания новой карточки 
-function createCard (item, templateSelector) {
+function createCard (data, templateSelector) {
     //addPopupWithImage();
     //openPopupWithImage.togglePopupWindow(data.name, data.link);
-    const card = new Card (item, templateSelector, openPopupWithImage.handleCardClick.bind(openPopupWithImage));
+    const popupWithImage = new PopupWithImage ('.popup_type_image');
+    const openPopupWithImage = popupWithImage.handleCardClick.bind(popupWithImage);
+    popupWithImage.setEventListeners();
+    const card = new Card (data, templateSelector, openPopupWithImage);
     const cardElement  = card.generateCard();
     return cardElement
 }
