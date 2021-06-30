@@ -81,30 +81,15 @@ const cardList = new Section({
 
 cardList.renderItems();
 
-// создаём экземпляр формы
-/*const form = new PopupWithForm({
-    formSelector: 'popup_type_add-card',
-    handleFormSubmit: (formData) => {
-        // при создании экземпляра UserCard передаём
-        // ему объект с данными формы
-        const card = new Card(formData, '.rectangle-item-template');
-        const cardElement = card.generateCard();
-        cardsList.setItem(cardElement);
-    }
-});
+function addCardSubmitHandler(data) {
+    const card = new Card(data, templateSelector, openPopupWithImage); // см. 7 спринт
+    const cardElement  = card.generateCard();
+    element.prepend(cardElement)
+}
 
-form.setEventListeners();*/
+const newCardPopup = new PopupWithForm('.popup_type_add-card', addCardSubmitHandler);
+newCardPopup.setEventListeners();
 
-/*// генерируем разметку формы
-const formElement = form.generateForm();
-
-// инициализируем класс, ответственный за добавление формы на страницу
-const formRenderer = new Section({
-    data: []
-    }, '.form-section');
-
-// добавляем форму на страницу
-formRenderer.setItem(formElement);*/
 
 // Функция открытия по клику на картинку
 //function handleCardClick (namePopup, linkPopup) {
