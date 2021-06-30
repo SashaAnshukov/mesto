@@ -1,38 +1,59 @@
 import {Popup} from './Popup.js';
 
-class PopupWithForm extends Popup {
-    constructor (popupSelector, submitHandler) {
+export class PopupWithForm extends Popup {
+    constructor ({popupSelector, handleFormSubmit}) {
         super(popupSelector);
-        this._submitHandler = submitHandler
+        this._handleFormSubmit = handleFormSubmit;
     }
 
     setEventListeners() {
+        
         super.setEventListeners();
-        this._form = this._popup.querySelector('.form');
-        this._form.addEventListener('submit', () => {
+        this._form = [...this._popup.querySelector('.popup_type_add-card')];
+        console.log(this._form);
+        this._form.addEventListener('submit', (event) => {
+            event.preventDefault();
             const data = this._getInputValues () // {name: ...., job:....}
-            this._submitHandler(data);
+            this._handleFormSubmit(data);
         });
     }
 
+    /*_getTemplate() {
+        const formElement = document
+        .querySelector('.rectangle-item-template')
+        .content
+        .querySelector('.rectangle')
+        .cloneNode(true);
+    
+        return formElement;
+    }*/
+
     _getInputValues() {
+        const inputs = this._form.querySelectorAll('.form_input'); //Array.from тоже самое
         const values = {}
-        const inputs = [...this._form.querySelectorAll('.form_input')]; //Array.from тоже самое
         inputs.forEach((input) => {
             values[input.name] = input.value
         })
         return values
     }
 
-    close() {
+    /*generateForm() {
+        this._element = this._getTemplate(); // создаём элемент
+        this.setEventListeners(); // добавляем обработчики
+    
+        return this._element; // возвращаем наружу
+    }*/
+
+    toggle() {
         this._form.reset();
-        super(close);
+        super.toggle();
     }
 
 }
 
-/*function addCardSubmitHandler(data) {
+/*function addCardSubmitHandler(data?) {
     const card = new Card(data); // см. 7 спринт
+    card.getCard()
     list.prepend(card.getCard())
 }
 

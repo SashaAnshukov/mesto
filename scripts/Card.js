@@ -3,14 +3,14 @@
 //содержит приватные методы, которые работают с разметкой, устанавливают слушателей событий;
 //содержит приватные методы для каждого обработчика;
 //содержит один публичный метод, который возвращает полностью работоспособный и наполненный данными элемент карточки.
-//import {PopupWithImage} from './PopupWithImage.js';
+import {PopupWithImage} from './PopupWithImage.js';
 
 export class Card {
     constructor (data, cardSelector, handleCardClick) {
         this._nameCard = data.name;
         this._linkCard = data.link;
         this._cardSelector = cardSelector;
-        this.handleCardClick = handleCardClick.bind();
+        this.handleCardClick = handleCardClick.bind(this);
     }
 
     _getTemplate() {

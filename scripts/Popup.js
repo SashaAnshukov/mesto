@@ -2,30 +2,40 @@
 export class Popup {
     constructor (popupSelector) {
         this._popup = document.querySelector(popupSelector);
-        this._closePopupOnEcs = this._closePopupOnEcs.bind();
-        //this._closePopupOnOverlay = this._closePopupOnOverlay.bind();
+        this._closePopupOnEcs = this._closePopupOnEcs.bind(this);
+        this._closePopupOnOverlay = this._closePopupOnOverlay.bind(this);
     }
 
-    open () {
-        this._popup.сlassList.toggle('popup_visible');
-        document.addEventListener('keydown', this._closePopupOnEcs);
+    //open close
+    toggle () {
+        this._popup.classList.toggle('popup_visible');
+        if (this._popup.classList.contains('popup_visible')) {
+            document.addEventListener('click', this._closePopupOnOverlay);
+            document.addEventListener('keydown', this._closePopupOnEcs);
+        } else {
+            document.removeEventListener('click', this._closePopupOnOverlay);
+            document.removeEventListener('keydown', this._closePopupOnEcs);
+        }
     }
-
-    /*close() {
-        this._popup.сlassList.remove('.popup__open');
-        document.removeEventListener('keyup', this._closePopupOnEcs);
-    }*/
 
     // _handleEscClose
     _closePopupOnEcs(event) { 
-        if(event.key === 27) {
-            this.open();
+        if(event.key == 'Escape') {
+            this.toggle();
         }
+    }
+
+    _closePopupOnOverlay(event) { 
+        const getPopupOverlayOnClick = event.target.closest('.popup__overlay');
+        if (event.target == getPopupOverlayOnClick) {
+            //console.log(event.target);
+            this.toggle();
+        };
     }
 
     setEventListeners() {
         this._popup.querySelector('.popup__close-button').addEventListener('click', () => {
-            this.open();
+            this.toggle();
         });
         //this._popup.addEventListener('click', this._closePopupOnOverlay());
     }

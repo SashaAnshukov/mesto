@@ -6,10 +6,11 @@ import {FormValidator} from './FormValidator.js';
 import {initialCards} from './initialCards.js';
 import {PopupWithImage} from './PopupWithImage.js';
 import Section from './Section.js';
+import {PopupWithForm} from './PopupWithForm.js';
 
 const element = document.querySelector('.elements');
 //const rectangleItemTemplate = document.querySelector('.rectangle-item-template').content.querySelector('.rectangle');
-const EscapeKey = 'Escape';
+//const EscapeKey = 'Escape';
 
 // Постянные для модальных окон
 const editPopup = document.querySelector('.popup_type_edit');
@@ -53,18 +54,16 @@ editPopupValidator.enableValidation();
 const addCardPopupValidator = new FormValidator (validationMassive, addCardPopup);
 addCardPopupValidator.enableValidation();
 
-
+const popupWithImage = new PopupWithImage ('.popup_type_image');
+const openPopupWithImage = popupWithImage.handleCardClick.bind(popupWithImage);
+popupWithImage.setEventListeners();
 
 //функция создания новой карточки 
 function createCard (data, templateSelector) {
-    //addPopupWithImage();
-    //openPopupWithImage.togglePopupWindow(data.name, data.link);
-    const popupWithImage = new PopupWithImage ('.popup_type_image');
-    const openPopupWithImage = popupWithImage.handleCardClick.bind(popupWithImage);
-    popupWithImage.setEventListeners();
     const card = new Card (data, templateSelector, openPopupWithImage);
     const cardElement  = card.generateCard();
     return cardElement
+    //list.prepend(cardElement);
 }
 
 const cardList = new Section({
@@ -81,6 +80,31 @@ const cardList = new Section({
 );
 
 cardList.renderItems();
+
+// создаём экземпляр формы
+/*const form = new PopupWithForm({
+    formSelector: 'popup_type_add-card',
+    handleFormSubmit: (formData) => {
+        // при создании экземпляра UserCard передаём
+        // ему объект с данными формы
+        const card = new Card(formData, '.rectangle-item-template');
+        const cardElement = card.generateCard();
+        cardsList.setItem(cardElement);
+    }
+});
+
+form.setEventListeners();*/
+
+/*// генерируем разметку формы
+const formElement = form.generateForm();
+
+// инициализируем класс, ответственный за добавление формы на страницу
+const formRenderer = new Section({
+    data: []
+    }, '.form-section');
+
+// добавляем форму на страницу
+formRenderer.setItem(formElement);*/
 
 // Функция открытия по клику на картинку
 //function handleCardClick (namePopup, linkPopup) {
