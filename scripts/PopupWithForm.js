@@ -5,27 +5,31 @@ export class PopupWithForm extends Popup {
         super(popupSelector);
         this._handleFormSubmit = handleFormSubmit;
     }
+    
     _getInputValues() {
-        const values = {}
-        const inputs = Array.from(this._popup.querySelectorAll('.popup__input'));
+        const inputs = Array.from(this._form.querySelectorAll('.popup__input'));
+        const values = {};
         //this._form = [...this._popup.querySelectorAll('.popup__input')];
         inputs.forEach((input) => {
+            //const addCardnamePlace = document.querySelector('.popup__input_text_namePlace');
             values[input.name] = input.value;
-            values[input.link] = link.value;
+            //values[input.name] = input.value;
         })
         return values
     }
+
     setEventListeners() {
-        
         super.setEventListeners();
         this._form = this._popup.querySelector('.popup__form');
         this._form.addEventListener('submit', (event) => {
             event.preventDefault();
-            const data = this._getInputValues () // {name: ...., job:....}
+            const data = this._getInputValues (); // {name: ...., job:....}
             this._handleFormSubmit(data);
+            super.toggle();
         });
     }
-    toggle() {
+
+    close() {
         this._form.reset();
         super.toggle();
     }

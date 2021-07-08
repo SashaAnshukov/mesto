@@ -33,8 +33,12 @@ export class Card {
 
         const cardImage = this._element.querySelector('.rectangle__image');
         const cardTitle = this._element.querySelector('.rectangle__mesto-text');
+        //console.log(cardImage);
+        //console.log(cardTitle);
         cardImage.src = this._linkCard;
+        //console.log(cardImage.src);
         cardTitle.textContent = this._nameCard;
+        //console.log(cardTitle.textContent);
         cardTitle.alt = this._nameCard;
 
         return this._element;

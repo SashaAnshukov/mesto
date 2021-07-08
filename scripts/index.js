@@ -7,6 +7,7 @@ import {initialCards} from './initialCards.js';
 import {PopupWithImage} from './PopupWithImage.js';
 import Section from './Section.js';
 import {PopupWithForm} from './PopupWithForm.js';
+import {UserInfo} from './UserInfo.js';
 
 const element = document.querySelector('.elements');
 //const rectangleItemTemplate = document.querySelector('.rectangle-item-template').content.querySelector('.rectangle');
@@ -61,7 +62,7 @@ popupWithImage.setEventListeners();
 //функция создания новой карточки 
 function createCard (data, templateSelector) {
     const card = new Card (data, templateSelector, openPopupWithImage);
-    const cardElement  = card.generateCard();
+    const cardElement = card.generateCard();
     return cardElement
     //list.prepend(cardElement);
 }
@@ -82,13 +83,32 @@ const cardList = new Section({
 cardList.renderItems();
 
 function addCardSubmitHandler(data) {
-    const card = new Card(data, templateSelector, openPopupWithImage); // см. 7 спринт
+    const card = new Card(data, '.rectangle-item-template', openPopupWithImage); // см. 7 спринт
     const cardElement  = card.generateCard();
     element.prepend(cardElement)
 }
 
-const newCardPopup = new PopupWithForm('.popup_type_add-card', addCardSubmitHandler);
-newCardPopup.setEventListeners();
+const popupWithForm = new PopupWithForm ('.popup_type_add-card', addCardSubmitHandler);
+openAddPopupButton.addEventListener('click', () => popupWithForm.toggle());
+popupWithForm.setEventListeners();
+
+
+const userInfo = new UserInfo ({name: '.profile__title', job: '.profile__subtitle'});
+const editProfilePopup = new PopupWithForm ('.popup_type_edit', editFormSubmitHandler);
+openEditPopupButton.addEventListener('click', () => {
+    editProfilePopup.toggle();
+    const info = userInfo.getUserInfo();
+    console.log (info);
+    popupTitle.value = info.name;
+    popupSubTitle.value = info.job;
+});
+
+
+function editFormSubmitHandler (data) { // editFormSubmitHandler = handleFormSubmit из PopupWithForm
+    userInfo.setUserInfo(data);
+}
+
+editProfilePopup.setEventListeners();
 
 
 // Функция открытия по клику на картинку
@@ -236,15 +256,4 @@ console.log(popupOverlays);*/
 
 
 
-/*const userInfo = new UserInfo (
-    {
-        name: '.profile__name',
-        job: '.profile__job'
-    }
-)
 
-const editProfilePopup = new PopupWithForm ('...',);
-
-function editFormSubmitHandler (data) { // editFormSubmitHandler = _submitHandler из PopupWithForm????
-    userInfo.setUserInfo(data)
-}*/
