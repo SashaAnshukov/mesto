@@ -25,7 +25,8 @@ export class PopupWithForm extends Popup {
             event.preventDefault();
             const data = this._getInputValues (); // {name: ...., job:....}
             this._handleFormSubmit(data);
-            super.toggle();
+            this.close();
+            document.querySelector('[aria-label="createButton"]').setAttribute('disabled', true);
         });
     }
 
