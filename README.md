@@ -5,7 +5,7 @@
 Места России+
 
 ### **Технологии**  
-HTML5, CSS, Адаптив, js
+HTML5, CSS, Адаптив, js, ООП (ES6-классы), webpack
 
 Ссылка на проектную работу:
 * https://sashaanshukov.github.io/mesto/

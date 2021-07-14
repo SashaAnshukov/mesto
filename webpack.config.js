@@ -1,4 +1,4 @@
-/*const path = require('path'); // подключаем path к конфигу вебпак
+const path = require('path'); // подключаем path к конфигу вебпак
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // подключили плагин html
 const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // подключили плагин - удалять содержимое папки dist
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // подключили плагин css
@@ -6,7 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // подклю
 // module.exports — это синтаксис экспорта в Node.js
 module.exports = {
     // указали первое место, куда заглянет webpack, — файл index.js в папке src
-    entry: { main: './scripts/index.js' },
+    entry: { main: './src/scripts/index.js' },
     // указали в какой файл будет собираться весь js и дали ему имя
     output: {
         // переписали точку выхода, используя утилиту path 
@@ -59,9 +59,9 @@ module.exports = {
 
     plugins: [
         new HtmlWebpackPlugin({
-          template: 'index.html' // путь к файлу index.html
+          template: './src/index.html' // путь к файлу index.html
         }),
         new CleanWebpackPlugin(), // использовали плагин
         new MiniCssExtractPlugin() // подключение плагина для объединения файлов
     ]
-}*/
+}

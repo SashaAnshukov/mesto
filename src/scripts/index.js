@@ -2,7 +2,7 @@ console.log('Hello, World!')
 import {Card} from './Card.js';
 import {validationMassive} from './FormValidator.js';
 import {FormValidator} from './FormValidator.js';
-//import '../pages/index.css'; // добавили импорт главного файла стилей
+import '../pages/index.css'; // добавили импорт главного файла стилей
 import {initialCards} from './initialCards.js';
 import {PopupWithImage} from './PopupWithImage.js';
 import Section from './Section.js';
@@ -16,7 +16,7 @@ const element = document.querySelector('.elements');
 // Постянные для модальных окон
 const editPopup = document.querySelector('.popup_type_edit');
 const addCardPopup = document.querySelector('.popup_type_add-card');
-const openImagePopup = document.querySelector('.popup_type_image');
+/*const openImagePopup = document.querySelector('.popup_type_image');*/
 
 // Постянные для кнопок открытия модальных окон
 const openEditPopupButton = document.querySelector('.profile__edit-button');
@@ -24,30 +24,30 @@ const openAddPopupButton = document.querySelector('.profile__add-button');
 //const openImageButton = document.querySelector('.profile__add-button');
 
 // Постянные для кнопок закрытия модальных окон
-const closeEditPopupButton = editPopup.querySelector('.popup__close-button');
+/*const closeEditPopupButton = editPopup.querySelector('.popup__close-button');
 const closeAddPopupButton = addCardPopup.querySelector('.popup__close-button');
-const closeImagePopupButton = openImagePopup.querySelector('.popup__close-button');
+const closeImagePopupButton = openImagePopup.querySelector('.popup__close-button');*/
 
 // Постянные popup image
-const popupFullImageCaption =  document.querySelector('.popup__figure-caption');
-const popupFullImage =  document.querySelector('.popup__figure-image');
+/*const popupFullImageCaption =  document.querySelector('.popup__figure-caption');
+const popupFullImage =  document.querySelector('.popup__figure-image');*/
 
 // Постоянные popup'a 
 //const popupOverlay = document.querySelector('.popup__overlay');
-const popupEditContainer = editPopup.querySelector('.popup__container');
+/*const popupEditContainer = editPopup.querySelector('.popup__container');
 const popupAddContainer = addCardPopup.querySelector('.popup__container');
 const popupContainerImage = openImagePopup.querySelector('.popup__container-forImage');
 const profileTitle = document.querySelector('.profile__title');
-const profileSubTitle = document.querySelector('.profile__subtitle');
+const profileSubTitle = document.querySelector('.profile__subtitle');*/
 const popupTitle = document.querySelector('.popup__input_text_name');
 const popupSubTitle = document.querySelector('.popup__input_text_profession');
-const addCardnamePlace = document.querySelector('.popup__input_text_namePlace');
+/*const addCardnamePlace = document.querySelector('.popup__input_text_namePlace');
 const addCardlink = document.querySelector('.popup__input_text_link');
-const buttonAddCard = document.querySelector('[aria-label="createButton"]');
+const buttonAddCard = document.querySelector('[aria-label="createButton"]');*/
 
 // выбираю класс с наведением
-const noTransitionCloseEditPopupButton = editPopup.querySelector('.popup__close-button, .opacity-buttons');
-const noTransitionCloseAddPopupButton = addCardPopup.querySelector('.popup__close-button, .opacity-buttons');
+/*const noTransitionCloseEditPopupButton = editPopup.querySelector('.popup__close-button, .opacity-buttons');
+const noTransitionCloseAddPopupButton = addCardPopup.querySelector('.popup__close-button, .opacity-buttons');*/
 
 const editPopupValidator = new FormValidator (validationMassive, editPopup);
 editPopupValidator.enableValidation();
@@ -67,6 +67,7 @@ function createCard (data, templateSelector) {
     //list.prepend(cardElement);
 }
 
+// отрисовка элементов на странице
 const cardList = new Section({
     item: initialCards,
     renderer: (item) => {
@@ -92,7 +93,7 @@ const popupWithForm = new PopupWithForm ('.popup_type_add-card', addCardSubmitHa
 openAddPopupButton.addEventListener('click', () => popupWithForm.toggle());
 popupWithForm.setEventListeners();
 
-
+// управление отображением информации о пользователе на странице
 const userInfo = new UserInfo ({name: '.profile__title', job: '.profile__subtitle'});
 const editProfilePopup = new PopupWithForm ('.popup_type_edit', editFormSubmitHandler);
 openEditPopupButton.addEventListener('click', () => {
@@ -102,7 +103,6 @@ openEditPopupButton.addEventListener('click', () => {
     popupTitle.value = info.name;
     popupSubTitle.value = info.job;
 });
-
 
 function editFormSubmitHandler (data) { // editFormSubmitHandler = handleFormSubmit из PopupWithForm
     userInfo.setUserInfo(data);
@@ -251,9 +251,3 @@ console.log(popupOverlays);*/
         togglePopupWindow(openedPopup);
     };
 }*/
-
-
-
-
-
-

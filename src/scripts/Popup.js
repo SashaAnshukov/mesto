@@ -37,6 +37,5 @@ export class Popup {
         this._popup.querySelector('.popup__close-button').addEventListener('click', () => {
             this.toggle();
         });
-        //this._popup.addEventListener('click', this._closePopupOnOverlay());
     }
 }

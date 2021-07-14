@@ -15,8 +15,6 @@ export class Card {
 
     _getTemplate() {
         // здесь выполним все необходимые операции, чтобы вернуть разметку
-        /*const cardElement = document.querySelector(this._cardSelector)
-        .content.querySelector('.rectangle').cloneNode(true);*/
         const cardElement = document
         .querySelector(this._cardSelector)
         .content
@@ -39,7 +37,7 @@ export class Card {
         //console.log(cardImage.src);
         cardTitle.textContent = this._nameCard;
         //console.log(cardTitle.textContent);
-        cardTitle.alt = this._nameCard;
+        cardImage.alt = this._nameCard;
 
         return this._element;
     }
@@ -47,11 +45,6 @@ export class Card {
     _setEventListeners() {
         this._element.querySelector('.rectangle__image')
         .addEventListener('click', () => this.handleCardClick(this._nameCard, this._linkCard));
-        /*this._element = this._getTemplate();
-        this._cardImage = this._element.querySelector('.rectangle__image');
-        this._cardImage.addEventListener('click', () => {
-            this._handleCardClick(this._name, this._link)
-        });*/
 
         const buttonLikeElement = this._element.querySelector('.rectangle__mesto-like');
         buttonLikeElement.addEventListener('click', () => this._handleLike());
@@ -59,15 +52,6 @@ export class Card {
         const buttonTrash = this._element.querySelector('.rectangle__trash');
         buttonTrash.addEventListener('click', () => this._handleTrash());
     }
-
-    /*_handleOpenImage() {
-        const popupImage = document.querySelector('.popup__figure-image');
-        const popupFullImageCaption =  document.querySelector('.popup__figure-caption');
-        popupImage.src = this._linkCard;
-        popupImage.alt = this._nameCard; 
-        popupFullImageCaption.textContent = this._nameCard; 
-        document.querySelector('.popup_type_image').classList.toggle('popup_visible');
-    }*/
 
     _handleLike() {
         this._element.querySelector('.rectangle__mesto-like').classList.toggle('rectangle__mesto-like_active')

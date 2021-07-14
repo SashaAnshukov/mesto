@@ -1,4 +1,4 @@
-/*const presets = [
+const presets = [
     ['@babel/env', { // какой пресет использовать
       targets: { // какие версии браузеров поддерживать
         edge: '17',
@@ -14,4 +14,4 @@
     }]
     ];
 
-module.exports = { presets };*/
+module.exports = { presets };
