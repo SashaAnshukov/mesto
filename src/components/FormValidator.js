@@ -35,9 +35,9 @@ export class FormValidator {
         //повесим событие ввода на инпут
         const inputListIterator = (inputElement) => {
     
-            const handleInput = (formElement) => {
+            const handleInput = () => {
                 //проверяем валидность инпута
-                this._checkInputValidity(formElement, inputElement);
+                this._checkInputValidity(inputElement);
                 //переключаем состояние кнопки
                 this._toggleButtonState();
             }
@@ -64,7 +64,7 @@ export class FormValidator {
     }
     
     //функция проверки валидности инпута по длине и type
-    _checkInputValidity (formElement, inputElement) {
+    _checkInputValidity (inputElement) {
     const isInputNotValid = !inputElement.validity.valid;
     //если не валиден, то показываем ошибку
     if (isInputNotValid) {
@@ -93,9 +93,6 @@ export class FormValidator {
 
     //функция валидации
     enableValidation (/*validationMassive*/) {
-    //находим все формы на сранице
-    //const formList = Array.from(document.querySelectorAll(this._validationMassive.popupFormSelector));
-    //console.log(formList);
         this._setEventListeners();
     };
 }

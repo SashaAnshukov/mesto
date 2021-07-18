@@ -29,6 +29,6 @@ export class PopupWithForm extends Popup {
 
     close() {
         this._form.reset();
-        super.toggle();
+        super.close();
     }
 }

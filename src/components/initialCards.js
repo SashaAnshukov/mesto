@@ -1,8 +1,8 @@
 // Массив с картинками
 export const initialCards = [
     {
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+        name: 'Кушька',
+        link: 'https://astromeridian.su/wp-content/uploads/2020/05/2d8efb22306923.563101bec8ce3-scaled.jpg'
     },
     {
         name: 'Челябинская область',
