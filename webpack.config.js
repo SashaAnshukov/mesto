@@ -14,6 +14,7 @@ module.exports = {
         filename: 'main.js',
         publicPath: ''
     },
+    devtool: 'cheap-module-source-map', // для корректного отажения нумераци строк в devtools
     mode: 'development', // добавили режим разработчика
     devServer: {
         contentBase: path.resolve(__dirname, './dist'), // путь, куда "смотрит" режим разработчика

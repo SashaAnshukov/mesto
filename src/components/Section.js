@@ -6,7 +6,7 @@ export default class Section {
         this._container = document.querySelector(containerSelector);//селектор контейнера, в который нужно добавлять созданные элементы.
     }
 
-    //метод отрисовкаи каждого отдельного элемента
+    //метод отрисовки каждого отдельного элемента
     renderItems() {
         this._renderedItems.forEach(items => {
             
