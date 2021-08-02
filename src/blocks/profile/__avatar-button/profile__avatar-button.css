@@ -1,0 +1,24 @@
+.profile__avatar-button {
+    background: url('./../../../images/VectorAvatar.svg') center no-repeat;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    border: 0;
+    outline: none;
+    cursor: pointer;
+    position: absolute;
+    left: 70px;
+    top: 190px;
+}
+
+@media screen and (max-width:767px) {
+    .profile__avatar-button {
+        background-size: cover;
+        height: 18px;
+        width: 18px;
+    }
+}

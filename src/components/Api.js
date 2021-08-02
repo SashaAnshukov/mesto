@@ -4,6 +4,10 @@ export class Api {
         this._token = token;
     }
 
+    getFullPageInfo() {
+        return Promise.all([this.getInitialCards(), this.getUserData()])
+    }
+
     getInitialCards() {
         return fetch(`${this._adress}/cards`, {
             method: 'GET',
@@ -19,10 +23,6 @@ export class Api {
             console.log('Ошибка - запрос плучения карточек с сервера не выполнен', err);
         })
     }
-
-    /*getFullPageInfo() {
-        return Promise.all([this.getCards(), this.getUserData()])
-    }*/
     
     getUserData() {
         return fetch(`${this._adress}/users/me`, {
@@ -49,8 +49,7 @@ export class Api {
             },
             body: JSON.stringify({
                 name: data.name,
-                about: data.about,
-                avatar: data.avatar
+                about: data.about
             })
         })
         .then((response) => {
@@ -58,6 +57,26 @@ export class Api {
         })
         .catch((err) => {
             console.log('Ошибка - запрос редактирования профиля не выполнен', err);
+        })
+    }
+
+    setUserAvatar(avatar) {
+        console.log('!!!', avatar);
+        return fetch(`${this._adress}/users/me/avatar`, {
+            method: 'PATCH',
+            headers: {
+                authorization: this._token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                avatar: avatar
+            })
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .catch((err) => {
+            console.log('Ошибка - запрос редактирования аватара не выполнен', err);
         })
     }
 
@@ -82,7 +101,37 @@ export class Api {
         })
     }
 
-    /*like(cardId, isLiked) {
-        return this._request(`cards/likes/${cardId}`, isLiked? 'DELETE' : 'PUT')
-    }*/
+    //7. Удаление карточки 
+    deleteCard(id) {
+        return fetch(`${this._adress}/cards/${id}`, {
+            method: 'DELETE',
+            headers: {
+                authorization: this._token,
+                'Content-Type': 'application/json' 
+            },
+        })
+        .then((response) => {
+            response.json();
+        })
+        .catch((err) => {
+            console.log('Ошибка - Добавление новой карточки не выплнено', err);
+        })
+    }
+
+    //8. Лайки 
+    setLikeCard(id) {
+        return fetch(`${this._adress}/cards/likes/${id}`, {
+            method: 'PUT',
+            headers: {
+                authorization: this._token,
+                'Content-Type': 'application/json' 
+            },
+        })
+        .then((response) => {
+            response.json();
+        })
+        .catch((err) => {
+            console.log('Ошибка - Добавление новой карточки не выплнено', err);
+        })
+    }
 }

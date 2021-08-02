@@ -8,6 +8,7 @@ import Section from '../components/Section.js';
 import {PopupWithForm} from '../components/PopupWithForm.js';
 import {UserInfo} from '../components/UserInfo.js';
 import {Api} from '../components/Api.js';
+//import { PopupConfirmDelete } from '../components/PopupConfirmDelete.js';
 
 const element = document.querySelector('.elements');
 
@@ -19,10 +20,14 @@ const addCardPopup = document.querySelector('.popup_type_add-card');
 // Постянные для кнопок открытия модальных окон
 const openEditPopupButton = document.querySelector('.profile__edit-button');
 const openAddPopupButton = document.querySelector('.profile__add-button');
+const openAvatarPopupButton = document.querySelector('.profile__avatar-button');
 
 // Постоянные popup'a 
 const popupTitle = document.querySelector('.popup__input_text_name');
 const popupSubTitle = document.querySelector('.popup__input_text_profession');
+const popupAvatarSrc = document.querySelector('.popup__input_text_linkAvatar');
+
+const trashButton = document.querySelector('.rectangle__trash');
 
 const editPopupValidator = new FormValidator (validationMassive, editPopup);
 editPopupValidator.enableValidation();
@@ -40,15 +45,91 @@ const api = new Api({
     }
 );
 
-// 1. Загрузка информации о пользователе с сервера
-api.getUserData()
+//6, 7 удаление карточки
+function confirmDelete (card) {
+    const popupConfirmDelete = new PopupWithForm ('.popup_type_confirm', handleConfirmDelete);
+    popupConfirmDelete.setEventListeners();
+    
+    //функция подтверждения удаленя каточки
+    function handleConfirmDelete () {
+        api.deleteCard(card._cardId)
+            .then((response) => {
+            card.handleTrash();
+            })
+    }
+
+    popupConfirmDelete.open();
+}
+
+//5, 8 likes
+function handleCardLike (card) {
+    console.log('like!!!!');
+    api.setLikeCard(card._cardId)
+        .then((response) => {
+            card.setLikesInfo(response);
+        })
+} 
+
+api.getFullPageInfo()
     .then((response) => {
-        console.log(response);
-        userInfo.setUserInfo(response)
+        const cardsData = response[0];
+        console.log(cardsData);
+        const userData = response[1];
+        console.log(userData);
+        const currentUserId = userData._id; //мой id
+        userInfo.setUserInfo(userData);
+
+        const popupWithImage = new PopupWithImage ('.popup_type_image');
+        const openPopupWithImage = popupWithImage.open.bind(popupWithImage);
+        popupWithImage.setEventListeners();
+
+        
+        //функция создания новой карточки 
+        function createCard (data, templateSelector) {
+        const card = new Card (data, currentUserId,
+            templateSelector, openPopupWithImage, confirmDelete, handleCardLike
+        );
+        const cardElement = card.generateCard();
+        return cardElement
+        }
+
+        // отрисовка элементов на странице
+        const cardList = new Section({
+            items: cardsData,
+            renderer: (data) => {
+                const oneCard = createCard(data, '.rectangle-item-template');
+                cardList.addItem(oneCard);
+            },
+            },
+        '.elements'
+        );
+    
+        cardList.renderItems();;
+
+        function addCardSubmitHandler(data) {
+
+            api.setMyCard({name:data.name, link:data.link})
+                .then((data) => {
+                    const card = new Card(
+                        data, currentUserId,
+                        '.rectangle-item-template', openPopupWithImage, confirmDelete, handleCardLike
+                    ); 
+                    const cardElement  = card.generateCard();
+                    element.prepend(cardElement)
+                })
+                .catch (event => console.log(`Ошибка отправки карточки: ${event}`))
+        }
+        
+        const popupWithForm = new PopupWithForm ('.popup_type_add-card', addCardSubmitHandler);
+        openAddPopupButton.addEventListener('click', () => popupWithForm.open());
+        popupWithForm.setEventListeners();
     })
+    .catch (event => console.log(`Ошибка получения данных пользователя: ${event}`))
+
+// 1. Загрузка информации о пользователе с сервера
 
 // 2. Управление отображением информации о пользователе на странице
-const userInfo = new UserInfo ({name: '.profile__title', about: '.profile__subtitle'});
+const userInfo = new UserInfo ({name: '.profile__title', about: '.profile__subtitle', avatar: '.profile__avatar'});
 
 function editFormSubmitHandler (data) { // editFormSubmitHandler = handleFormSubmit из PopupWithForm
     api.setUserData({name:data.name, about:data.profession})
@@ -69,85 +150,28 @@ openEditPopupButton.addEventListener('click', () => {
 
 editProfilePopup.setEventListeners();
 
-const getInitialCards = api.getInitialCards();
-
-const cardsdata = getInitialCards.
-    then((response) => {
-        const InitialCards = response.map(response => ({name:response.name, link:response.link}));
-        return InitialCards
+function editAvatarSubmitHandler (avatar) { // editFormSubmitHandler = handleFormSubmit из PopupWithForm
+    api.setUserAvatar(avatar)
+    .then((response) => {
+        console.log(response);
+        userInfo.setAvatarInfo(response)
     })
+    .catch (event => console.log(`Ошибка - запрос редактирования аватара не выполнен: ${event}`))
+}
 
-//console.log(cardsdata);
+const changeAvatarPopup = new PopupWithForm ('.popup_type_change-avatar', editAvatarSubmitHandler);
+openAvatarPopupButton.addEventListener('click', () => {
+    changeAvatarPopup.open();
+    const AvatarInfo = userInfo.getAvatarInfo();
+    popupAvatarSrc.value = AvatarInfo.avatar;
+});
 
-const allcardsdata = Promise.resolve(cardsdata)
-    .then(function (value) {
-        const popupWithImage = new PopupWithImage ('.popup_type_image');
-        const openPopupWithImage = popupWithImage.open.bind(popupWithImage);
-        popupWithImage.setEventListeners();
-
-        //функция создания новой карточки 
-        function createCard (data, templateSelector) {
-        const card = new Card (data, templateSelector, openPopupWithImage);
-        const cardElement = card.generateCard();
-        return cardElement
-        }
-
-        // отрисовка элементов на странице
-        const cardList = new Section({
-            items: value,
-            renderer: (data) => {
-                const oneCard = createCard(data, '.rectangle-item-template');
-                cardList.addItem(oneCard);
-            },
-            },
-        '.elements'
-        );
-    
-        cardList.renderItems();;
-
-        function addCardSubmitHandler(data) {
-
-            const dataCard =
-                    api.setMyCard({name:data.name, link:data.link})
-                        .then((data) => {
-                            ({name:data.name, link:data.link})
-                            })
-                        .catch (event => console.log(`Ошибка - Добавление новой карточки не выплнено: ${event}`))
-            
-            const card = new Card(dataCard, '.rectangle-item-template',openPopupWithImage); 
-            const cardElement  = card.generateCard();
-            element.prepend(cardElement)
-        }
-        
-        const popupWithForm = new PopupWithForm ('.popup_type_add-card', addCardSubmitHandler);
-        openAddPopupButton.addEventListener('click', () => popupWithForm.open());
-        popupWithForm.setEventListeners();
-
-    });
-
-//console.log(allcardsdata);
-
-/*api.getFullPageInfo()
-    .then(([cardsData, userData]) => {
-        const currentUserId = userData._id; //мой id
-        return newUserValues.setUserInfo(userData)
-    })
-    .catch (event => console.log(`Ошибка получения данных пользователя: ${event}`))
-    
+changeAvatarPopup.setEventListeners();
 
 // функция счётика лайков апи
-function likeCard (card) {
+/*function likeCard (card) {
     api.like(card.getId(), card.getIsLiked())
     .then(res => {
         card.updateLikesInfo(res.likes)
     });
-}
-
-//подтверждение удалениякарточки
-function
-const popupConfirmDelete = new PopupConfirmDelete ('.popup_type_add-card', addCardSubmitHandler);*/
-
-
-
-
-
+}*/

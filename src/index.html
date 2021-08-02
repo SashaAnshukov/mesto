@@ -17,9 +17,9 @@
 
             <section class="profile">
                 <div class="profile__space">
-                    <img class="profile__avatar" src="<%=require('./images/Avatar.png')%>" alt="Фото Жака-Ива Кусто"/>
-                    <!--<button type ="button" aria-label="edit" class="profile__edit-button opacity-buttons"></button>-->
-                    <div class="profile__info">
+                        <img class="profile__avatar" src="<%=require('./images/Avatar.png')%>" alt="Фото Жака-Ива Кусто"/>
+                        <button type ="button" aria-label="edit" class="profile__avatar-button opacity-buttons"></button>
+                        <div class="profile__info">
                         <h1 class="profile__title">Жак-Ив Кусто</h1>
                         <button type ="button" aria-label="edit" class="profile__edit-button opacity-buttons"></button>
                         <p class="profile__subtitle">Исследователь океана</p>
@@ -35,7 +35,10 @@
                         <button type ="button" aria-label="trash" class="rectangle__trash opacity-buttons"></button>
                         <div class="rectangle__info">
                             <h2 class="rectangle__mesto-text">Карачаевск</h2>
-                            <button type ="button" aria-label="like" class="rectangle__mesto-like opacity-like"></button>
+                            <div class="rectangle__likes">
+                                <button type ="button" aria-label="like" class="rectangle__mesto-like opacity-like"></button>
+                                <h3 class="rectangle__mesto-numbersLike">25</h3>
+                            </div>
                         </div>
                     </article>
                 </template>
@@ -101,15 +104,33 @@
             </div>
         </div>
 
-        <!--<div class="popup popup_type_close">
+        <div class="popup popup_type_confirm">
             <div class="popup__overlay"></div>
-            <div class="popup__container-confirm">
+            <div class="popup__container">
                     <button type ="button" aria-label="close" class="popup__close-button opacity-buttons"></button>
                     <h2 class="popup__name">Вы уверены?</h2>
+                    <form novalidate name ="Confirm" class="popup__form">
+                        <label class="popup__label">
                         <button type ="submit" aria-label="createButton" class="popup__button popup__button_invalid">Да</button>
                     </form>
             </div>
-        </div>-->
+        </div>
+
+        <div class="popup popup_type_change-avatar">
+            <div class="popup__overlay"></div>
+            <div class="popup__container">
+                    <button type ="button" aria-label="close" class="popup__close-button opacity-buttons"></button>
+                    <h2 class="popup__name">Обновить аватар</h2>
+                    <form novalidate name ="newPlace" class="popup__form">
+                        <label class="popup__label">    
+                            <input required type="url" name ="avatar" value=""
+                            placeholder = "Ссылка на аватар" class="popup__input popup__input_text_linkAvatar">
+                            <span class="popup__input-error"></span>
+                        </label>
+                        <button type ="submit" aria-label="createButton" class="popup__button popup__button_invalid">Сохранить</button>
+                    </form>
+            </div>
+        </div>
 
         <!--<script src="./scripts/initialCards.js"></script>-->
         <!--<script type="module" src="./scripts/index.js"></script>-->

@@ -32,8 +32,10 @@
 @import url('../blocks/header/__logo/header__logo.css');
 
 @import url('../blocks/profile/profile.css');
+@import url('../blocks/profile/__holder/profile__holder.css');
 @import url('../blocks/profile/__space//profile__space.css');
 @import url('../blocks/profile/__avatar/profile__avatar.css');
+@import url('../blocks/profile/__avatar-button/profile__avatar-button.css');
 @import url('../blocks/profile/__info/profile__info.css');
 @import url('../blocks/profile/__title/profile__title.css');
 @import url('../blocks/profile/__subtitle/profile__subtitle.css');
@@ -48,6 +50,7 @@
 @import url('../blocks/rectangle/__info/rectangle__info.css');
 @import url('../blocks/rectangle/__mesto-text/rectangle__mesto-text.css');
 @import url('../blocks/rectangle/__mesto-like/rectangle__mesto-like.css');
+@import url('../blocks/rectangle/__mesto-numbersLike/__mesto-numbersLike.css');
 @import url('../blocks/rectangle/__mesto-like/_active/rectangle__mesto-like_active.css');
 
 @import url('../blocks/footer/__copyright/footer__copyright.css');
