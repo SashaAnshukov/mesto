@@ -17,8 +17,10 @@
 
             <section class="profile">
                 <div class="profile__space">
-                        <img class="profile__avatar" src="<%=require('./images/Avatar.png')%>" alt="Фото Жака-Ива Кусто"/>
-                        <button type ="button" aria-label="edit" class="profile__avatar-button opacity-buttons"></button>
+                    <div class = profile__holder>
+                        <img class="profile__avatar" src="<%=require('./images/Avatar.png')%>" alt="Аватар пользователя"/>
+                        <button type ="button" aria-label="edit" class="profile__avatar-button"></button>
+                    </div>    
                         <div class="profile__info">
                         <h1 class="profile__title">Жак-Ив Кусто</h1>
                         <button type ="button" aria-label="edit" class="profile__edit-button opacity-buttons"></button>
@@ -110,8 +112,9 @@
                     <button type ="button" aria-label="close" class="popup__close-button opacity-buttons"></button>
                     <h2 class="popup__name">Вы уверены?</h2>
                     <form novalidate name ="Confirm" class="popup__form">
-                        <label class="popup__label">
-                        <button type ="submit" aria-label="createButton" class="popup__button popup__button_invalid">Да</button>
+                        <div class="popup__label">
+                            <button type ="submit" aria-label="createButton" class="popup__button popup__button_invalid">Да</button>
+                        </div>
                     </form>
             </div>
         </div>

@@ -20,20 +20,22 @@ export class Card {
         console.log('this._currentUserId', this._currentUserId);
     }
 
-    setLikesinfo (newCardData) {
+    setLikesInfo (newCardData) {
         if(newCardData) {
-            this._like = newCardData.likes
+            this._likes = newCardData.likes
         }
         
         const likesCount = this._likes.length;
         this._element.querySelector('.rectangle__mesto-numbersLike').textContent = likesCount;
         
-        const isLiked = this._likes.find(person => person._id === this._currentUserId);
-        if (isLiked) {
+        this.isLiked = this._likes.find(element => element._id === this._currentUserId);
+        if (this.isLiked) {
             this._element.querySelector('.rectangle__mesto-like').classList.add('rectangle__mesto-like_active')
         }
+        else {
+            this._element.querySelector('.rectangle__mesto-like').classList.remove('rectangle__mesto-like_active')
+        }
     }
-
 
     _getTemplate() {
         // здесь выполним все необходимые операции, чтобы вернуть разметку
@@ -57,14 +59,12 @@ export class Card {
         cardTitle.textContent = this._nameCard;
         cardImage.alt = this._nameCard;
 
-        this.setLikesinfo();
+        this.setLikesInfo();
 
         if (this._cardOwnerId !== this._currentUserId) {
             this._element.querySelector('.rectangle__trash').classList.add('rectangle__trash_hidden');
         }
         
-        
-
         return this._element;
     }
 
@@ -73,7 +73,7 @@ export class Card {
         .addEventListener('click', () => this.handleCardClick(this._nameCard, this._linkCard));
 
         const buttonLikeElement = this._element.querySelector('.rectangle__mesto-like');
-        buttonLikeElement.addEventListener('click', () => this._handleCardLike
+        buttonLikeElement.addEventListener('click', () => this._handleCardLike(this)
         //this._handleLike()
         );
 
@@ -81,24 +81,8 @@ export class Card {
         buttonTrash.addEventListener('click', () => this._handleCardDelete(this));
     }
 
-    _handleLike() {
-        this._element.querySelector('.rectangle__mesto-like').classList.toggle('rectangle__mesto-like_active')
-        this._handleLike(this);
-    }
-
     handleTrash() {
         this._element.closest('.rectangle').remove();
     }
 
-    /*getId() {
-        return this._card_.id;
-    }
-
-    getIsLiked() {
-        return this._IsLiked;
-    }
-
-    updateLikesInfo(likes) {
-        this._card.likes = likes;
-    }*/
 }

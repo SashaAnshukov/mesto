@@ -17,13 +17,13 @@ export class UserInfo {
         }
     }
 
-    setAvatarInfo (avatar) {
-        this._avatar.src = avatar;
+    setAvatarInfo (data) {
+        this._avatar.src = data.avatar;
     }
 
     getAvatarInfo () {
         return {
-            avatar: this._avatar.src,
+            avatar: this._avatar.src
         }
     }
 

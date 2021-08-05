@@ -60,7 +60,7 @@ export class Api {
         })
     }
 
-    setUserAvatar(avatar) {
+    setUserAvatar({avatar}) {
         console.log('!!!', avatar);
         return fetch(`${this._adress}/users/me/avatar`, {
             method: 'PATCH',
@@ -118,7 +118,7 @@ export class Api {
         })
     }
 
-    //8. Лайки 
+    //8. Лайки.постановка
     setLikeCard(id) {
         return fetch(`${this._adress}/cards/likes/${id}`, {
             method: 'PUT',
@@ -128,10 +128,27 @@ export class Api {
             },
         })
         .then((response) => {
-            response.json();
+            return response.json();
         })
         .catch((err) => {
-            console.log('Ошибка - Добавление новой карточки не выплнено', err);
+            console.log('Ошибка - запрос постановки лайка не выполнен', err);
+        })
+    }
+
+    //8. Лайки.удаление
+    deleteLikeCard(id) {
+        return fetch(`${this._adress}/cards/likes/${id}`, {
+            method: 'DELETE',
+            headers: {
+                authorization: this._token,
+                'Content-Type': 'application/json' 
+            },
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .catch((err) => {
+            console.log('Ошибка - запрос снятия лайка не выполнен', err);
         })
     }
 }
