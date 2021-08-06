@@ -24,7 +24,7 @@ export class PopupWithForm extends Popup {
             event.preventDefault();
             const data = this._getInputValues (); // {name: ...., job:....}
             this._handleFormSubmit(data);
-            this.close();
+            //this.close();
             document.querySelector('[aria-label="createButton"]').setAttribute('disabled', true);
             window.onload = function() {
                 document.querySelectorAll('.button').textContent = "Сохранение..."
@@ -32,12 +32,12 @@ export class PopupWithForm extends Popup {
         });
     }
 
-    preLoader (isLoading, loadingText = 'Сохранение...') {
+    preLoader (isLoading) {
         if (isLoading) {
-            this._popupButton.textContent = loadingText;
+            this._popupButton.textContent = 'Сохранение...';
         } 
         else {
-            this._popupButton.textContent = this.__defaultPopupButtonText;
+            this._popupButton.textContent = this._defaultPopupButtonText;
         }
     }
 

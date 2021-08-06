@@ -16,6 +16,7 @@ const element = document.querySelector('.elements');
 // Постянные для модальных окон
 const editPopup = document.querySelector('.popup_type_edit');
 const addCardPopup = document.querySelector('.popup_type_add-card');
+const addAatarPopup = document.querySelector('.popup_type_change-avatar');
 
 // Постянные для кнопок открытия модальных окон
 const openEditPopupButton = document.querySelector('.profile__edit-button');
@@ -26,13 +27,16 @@ const openAvatarPopupButton = document.querySelector('.profile__avatar-button');
 const popupTitle = document.querySelector('.popup__input_text_name');
 const popupSubTitle = document.querySelector('.popup__input_text_profession');
 
-const trashButton = document.querySelector('.rectangle__trash');
+//const trashButton = document.querySelector('.rectangle__trash');
 
 const editPopupValidator = new FormValidator (validationMassive, editPopup);
 editPopupValidator.enableValidation();
 
 const addCardPopupValidator = new FormValidator (validationMassive, addCardPopup);
 addCardPopupValidator.enableValidation();
+
+const addAatrPopupValidator = new FormValidator (validationMassive, addAatarPopup);
+addAatrPopupValidator.enableValidation();
 
 /*const popupWithImage = new PopupWithImage ('.popup_type_image');
 const openPopupWithImage = popupWithImage.open.bind(popupWithImage);
@@ -54,6 +58,7 @@ function confirmDelete (card) {
         api.deleteCard(card._cardId)
             .then((response) => {
             card.handleTrash();
+            popupConfirmDelete.close()
             })
     }
 
@@ -66,8 +71,9 @@ function handleCardLike (card) {
         api.deleteLikeCard(card._cardId)
         .then(res => {
             console.log('response', res);
-            card.setLikesInfo(res);
+            card.setLikesInfo(res);    
         })
+        .catch (event => console.log(`Ошибка удаления лайка: ${event}`));
     }
     else {
         api.setLikeCard(card._cardId)
@@ -75,6 +81,7 @@ function handleCardLike (card) {
             console.log('response', res);
             card.setLikesInfo(res);
         })
+        .catch (event => console.log(`Ошибка постановки лайка: ${event}`))
     } 
 }
 
@@ -88,6 +95,7 @@ api.getFullPageInfo()
         userInfo.setUserInfo(userData);
         userInfo.setAvatarInfo(userData);
 
+        // попап fullImage
         const popupWithImage = new PopupWithImage ('.popup_type_image');
         const openPopupWithImage = popupWithImage.open.bind(popupWithImage);
         popupWithImage.setEventListeners();
@@ -115,7 +123,27 @@ api.getFullPageInfo()
     
         cardList.renderItems();;
         
+        //добавление карточки
+        const popupWithForm = new PopupWithForm ('.popup_type_add-card', (data) => {
+            popupWithForm.preLoader(true); // preloader на кнопку при сабмите
+            api.setMyCard({name:data.name, link:data.link})
+                .then((data) => {
+                    const card = new Card(
+                        data, currentUserId,
+                        '.rectangle-item-template', openPopupWithImage, confirmDelete, handleCardLike
+                    ); 
+                    const cardElement  = card.generateCard();
+                    element.prepend(cardElement);
+                    popupWithForm.close()
+                })
+                .catch (event => console.log(`Ошибка добавления карточки: ${event}`))
+                .finally(() => {
+                    popupWithForm.preLoader(false);
+                })
+        });    
         
+        openAddPopupButton.addEventListener('click', () => popupWithForm.open());
+        popupWithForm.setEventListeners();
     })
     .catch (event => console.log(`Ошибка получения данных пользователя: ${event}`))
 
@@ -124,32 +152,14 @@ api.getFullPageInfo()
 // 2. Управление отображением информации о пользователе на странице
 const userInfo = new UserInfo ({name: '.profile__title', about: '.profile__subtitle', avatar: '.profile__avatar'});
 
-const popupWithForm = new PopupWithForm ('.popup_type_add-card', (data) => {
-    popupWithForm.preLoader(true); // preloader на кнопку при сабмите
-    api.setMyCard({name:data.name, link:data.link})
-        .then((data) => {
-            const card = new Card(
-                data, currentUserId,
-                '.rectangle-item-template', openPopupWithImage, confirmDelete, handleCardLike
-            ); 
-            const cardElement  = card.generateCard();
-            element.prepend(cardElement)
-        })
-        .catch (event => console.log(`Ошибка отправки карточки: ${event}`))
-        .finally(() => {
-            popupWithForm.preLoader(false);
-        })
-});    
 
-openAddPopupButton.addEventListener('click', () => popupWithForm.open());
-popupWithForm.setEventListeners();
-
-
+// редактирование профиля
 const editProfilePopup = new PopupWithForm ('.popup_type_edit', (data) => {
     editProfilePopup.preLoader(true); // preloader на кнопку при сабмите
     api.setUserData({name:data.name, about:data.profession})
         .then((response) => {
-            userInfo.setUserInfo(response)
+            userInfo.setUserInfo(response);
+            editProfilePopup.close()
         })
         .catch (event => console.log(`Ошибка - запрос редактирования профиля не выполнен: ${event}`))
         .finally(() => {
@@ -166,13 +176,13 @@ openEditPopupButton.addEventListener('click', () => {
 
 editProfilePopup.setEventListeners();
 
-
+// редактирование аватара
 const changeAvatarPopup = new PopupWithForm ('.popup_type_change-avatar', (data) => {
     changeAvatarPopup.preLoader(true); // preloader на кнопку при сабмите
     api.setUserAvatar({avatar: data.avatar})
         .then((response) => {
-            console.log(response);
             userInfo.setAvatarInfo(response)
+            changeAvatarPopup.close()
         })
         .catch (event => console.log(`Ошибка - запрос редактирования аватара не выполнен: ${event}`))
         .finally(() => {
