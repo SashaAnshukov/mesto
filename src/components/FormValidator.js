@@ -63,6 +63,14 @@ export class FormValidator {
         inputElement.classList.remove(this._validationMassive.popuplineError);
     }
     
+    resetValidation() {
+        this._toggleButtonState(); //управляем кнопкой
+
+        this._inputList.forEach((inputElement) => {
+        this._hideInputError(inputElement) //очищаем ошибки
+        });
+    }
+
     //функция проверки валидности инпута по длине и type
     _checkInputValidity (inputElement) {
     const isInputNotValid = !inputElement.validity.valid;

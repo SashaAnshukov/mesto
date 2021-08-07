@@ -12,7 +12,7 @@ export class Card {
         this.handleCardClick = handleCardClick.bind(this);
 
         this._cardOwnerId = data.owner._id;
-        this._cardId = data._id;
+        this.cardId = data._id;
         this._currentUserId = currentUserId;
         this._handleCardDelete = handleCardDelete;
         this._likes = data.likes;

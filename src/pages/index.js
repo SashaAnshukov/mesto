@@ -55,11 +55,12 @@ function confirmDelete (card) {
     
     //функция подтверждения удаленя каточки
     function handleConfirmDelete () {
-        api.deleteCard(card._cardId)
+        api.deleteCard(card.cardId)
             .then((response) => {
             card.handleTrash();
             popupConfirmDelete.close()
             })
+            .catch (event => console.log(`Ошибка удаления карточки: ${event}`));
     }
 
     popupConfirmDelete.open();
@@ -68,17 +69,17 @@ function confirmDelete (card) {
 //5, 8 likes
 function handleCardLike (card) {
     if (card.isLiked) {
-        api.deleteLikeCard(card._cardId)
+        api.deleteLikeCard(card.cardId)
         .then(res => {
-            console.log('response', res);
+            //console.log('response', res);
             card.setLikesInfo(res);    
         })
         .catch (event => console.log(`Ошибка удаления лайка: ${event}`));
     }
     else {
-        api.setLikeCard(card._cardId)
+        api.setLikeCard(card.cardId)
         .then((res) => {
-            console.log('response', res);
+            //console.log('response', res);
             card.setLikesInfo(res);
         })
         .catch (event => console.log(`Ошибка постановки лайка: ${event}`))
@@ -128,12 +129,15 @@ api.getFullPageInfo()
             popupWithForm.preLoader(true); // preloader на кнопку при сабмите
             api.setMyCard({name:data.name, link:data.link})
                 .then((data) => {
-                    const card = new Card(
+                    /*const card = new Card(
                         data, currentUserId,
                         '.rectangle-item-template', openPopupWithImage, confirmDelete, handleCardLike
-                    ); 
-                    const cardElement  = card.generateCard();
-                    element.prepend(cardElement);
+                    );*/
+                    const card = createCard(data, '.rectangle-item-template');
+                    card.prepend(data);
+
+                    /*const cardElement  = card.generateCard();
+                    cardList.prepend(cardElement);*/
                     popupWithForm.close()
                 })
                 .catch (event => console.log(`Ошибка добавления карточки: ${event}`))
@@ -142,7 +146,10 @@ api.getFullPageInfo()
                 })
         });    
         
-        openAddPopupButton.addEventListener('click', () => popupWithForm.open());
+        openAddPopupButton.addEventListener('click', () => {
+            addCardPopupValidator.resetValidation();
+            popupWithForm.open();
+        });
         popupWithForm.setEventListeners();
     })
     .catch (event => console.log(`Ошибка получения данных пользователя: ${event}`))
@@ -181,7 +188,7 @@ const changeAvatarPopup = new PopupWithForm ('.popup_type_change-avatar', (data)
     changeAvatarPopup.preLoader(true); // preloader на кнопку при сабмите
     api.setUserAvatar({avatar: data.avatar})
         .then((response) => {
-            userInfo.setAvatarInfo(response)
+            userInfo.setAvatarInfo(response);
             changeAvatarPopup.close()
         })
         .catch (event => console.log(`Ошибка - запрос редактирования аватара не выполнен: ${event}`))
@@ -191,6 +198,7 @@ const changeAvatarPopup = new PopupWithForm ('.popup_type_change-avatar', (data)
 });
 
 openAvatarPopupButton.addEventListener('click', () => {
+    addCardPopupValidator.resetValidation();
     changeAvatarPopup.open();
 });
 

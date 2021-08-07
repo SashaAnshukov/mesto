@@ -25,10 +25,7 @@ export class PopupWithForm extends Popup {
             const data = this._getInputValues (); // {name: ...., job:....}
             this._handleFormSubmit(data);
             //this.close();
-            document.querySelector('[aria-label="createButton"]').setAttribute('disabled', true);
-            window.onload = function() {
-                document.querySelectorAll('.button').textContent = "Сохранение..."
-        };
+            //document.querySelector('[aria-label="createButton"]').setAttribute('disabled', true);
         });
     }
 

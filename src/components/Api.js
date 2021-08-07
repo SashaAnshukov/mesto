@@ -15,13 +15,7 @@ export class Api {
                 authorization: this._token,
             },
         })
-        .then((response) => {
-            console.log(response);
-            return response.json();
-        })
-        .catch((err) => {
-            console.log('Ошибка - запрос плучения карточек с сервера не выполнен', err);
-        })
+        .then(this._checkResponse)
     }
     
     getUserData() {
@@ -31,13 +25,7 @@ export class Api {
                 authorization: this._token,
             },
         })
-        .then((response) => {
-            console.log(response);
-            return response.json();
-        })
-        .catch((err) => {
-            console.log('Ошибка - запрос полчения информации о пользователе с серверане выполнен', err);
-        })
+        .then(this._checkResponse)
     }
 
     setUserData(data) {
@@ -52,12 +40,7 @@ export class Api {
                 about: data.about
             })
         })
-        .then((response) => {
-            return response.json();
-        })
-        .catch((err) => {
-            console.log('Ошибка - запрос редактирования профиля не выполнен', err);
-        })
+        .then(this._checkResponse)
     }
 
     setUserAvatar({avatar}) {
@@ -72,15 +55,10 @@ export class Api {
                 avatar: avatar
             })
         })
-        .then((response) => {
-            return response.json();
-        })
-        .catch((err) => {
-            console.log('Ошибка - запрос редактирования аватара не выполнен', err);
-        })
+        .then(this._checkResponse)
     }
 
-    //4. Добавление новой карточки
+    //4. добавление новой карточки
     setMyCard(data) {
         return fetch(`${this._adress}/cards`, {
             method: 'POST',
@@ -93,15 +71,10 @@ export class Api {
                 link: data.link
             }),
         })
-        .then((response) => {
-            return response.json();
-        })
-        .catch((err) => {
-            console.log('Ошибка - Добавление новой карточки не выплнено', err);
-        })
+        .then(this._checkResponse)
     }
 
-    //7. Удаление карточки 
+    //7. удаление карточки 
     deleteCard(id) {
         return fetch(`${this._adress}/cards/${id}`, {
             method: 'DELETE',
@@ -110,15 +83,10 @@ export class Api {
                 'Content-Type': 'application/json' 
             },
         })
-        .then((response) => {
-            response.json();
-        })
-        .catch((err) => {
-            console.log('Ошибка - Добавление новой карточки не выплнено', err);
-        })
+        .then(this._checkResponse)
     }
 
-    //8. Лайки.постановка
+    //8. лайки.постановка
     setLikeCard(id) {
         return fetch(`${this._adress}/cards/likes/${id}`, {
             method: 'PUT',
@@ -127,15 +95,10 @@ export class Api {
                 'Content-Type': 'application/json' 
             },
         })
-        .then((response) => {
-            return response.json();
-        })
-        .catch((err) => {
-            console.log('Ошибка - запрос постановки лайка не выполнен', err);
-        })
+        .then(this._checkResponse)
     }
 
-    //8. Лайки.удаление
+    //8. лайки.удаление
     deleteLikeCard(id) {
         return fetch(`${this._adress}/cards/likes/${id}`, {
             method: 'DELETE',
@@ -144,11 +107,15 @@ export class Api {
                 'Content-Type': 'application/json' 
             },
         })
-        .then((response) => {
-            return response.json();
-        })
-        .catch((err) => {
-            console.log('Ошибка - запрос снятия лайка не выполнен', err);
-        })
+        .then(this._checkResponse)
     }
+
+    //метод проверки ответа от сервера
+    _checkResponse(response) {
+        // тут проверка ответа
+        if (response.ok) {
+            return response.json();
+        }
+    }
+
 }
