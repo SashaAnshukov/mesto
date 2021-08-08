@@ -49,22 +49,39 @@ const api = new Api({
 );
 
 //6, 7 удаление карточки
+const popupConfirmDelete = new PopupWithForm ('.popup_type_confirm');
+popupConfirmDelete.setEventListeners();
+
 function confirmDelete (card) {
-    const popupConfirmDelete = new PopupWithForm ('.popup_type_confirm', handleConfirmDelete);
-    popupConfirmDelete.setEventListeners();
-    
     //функция подтверждения удаленя каточки
+    popupConfirmDelete.setFormAction(handleConfirmDelete);
     function handleConfirmDelete () {
+        popupConfirmDelete.preLoader(true);
         api.deleteCard(card.cardId)
             .then((response) => {
             card.handleTrash();
             popupConfirmDelete.close()
             })
-            .catch (event => console.log(`Ошибка удаления карточки: ${event}`));
+            .catch (event => console.log(`Ошибка удаления карточки: ${event}`))
+            .finally(() => {
+                popupConfirmDelete.preLoader(false);
+            })
     }
 
     popupConfirmDelete.open();
 }
+
+/*const popupConfirmDelete = new PopupWithForm ('.popup_type_confirm', (card) => {
+    api.deleteCard(card.cardId)
+            .then((response) => {
+            card.handleTrash();
+            popupConfirmDelete.close()
+            })
+            .catch (event => console.log(`Ошибка удаления карточки: ${event}`));
+        popupConfirmDelete.open();
+    });
+        
+popupConfirmDelete.setEventListeners();*/
 
 //5, 8 likes
 function handleCardLike (card) {
@@ -134,7 +151,7 @@ api.getFullPageInfo()
                         '.rectangle-item-template', openPopupWithImage, confirmDelete, handleCardLike
                     );*/
                     const card = createCard(data, '.rectangle-item-template');
-                    card.prepend(data);
+                    cardList.prepend(card);
 
                     /*const cardElement  = card.generateCard();
                     cardList.prepend(cardElement);*/
