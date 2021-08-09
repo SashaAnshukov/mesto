@@ -2,7 +2,6 @@ import {Card} from '../components/Card.js';
 import {validationMassive} from '../components/FormValidator.js';
 import {FormValidator} from '../components/FormValidator.js';
 import '../pages/index.css'; // добавили импорт главного файла стилей
-//import {initialCards} from '../components/initialCards.js';
 import {PopupWithImage} from '../components/PopupWithImage.js';
 import Section from '../components/Section.js';
 import {PopupWithForm} from '../components/PopupWithForm.js';
@@ -11,7 +10,6 @@ import {Api} from '../components/Api.js';
 //import { PopupConfirmDelete } from '../components/PopupConfirmDelete.js';
 
 const element = document.querySelector('.elements');
-
 
 // Постянные для модальных окон
 const editPopup = document.querySelector('.popup_type_edit');
@@ -196,6 +194,7 @@ openEditPopupButton.addEventListener('click', () => {
     const info = userInfo.getUserInfo();
     popupTitle.value = info.name;
     popupSubTitle.value = info.job;
+    editPopupValidator.resetValidation();
 });
 
 editProfilePopup.setEventListeners();
