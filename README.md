@@ -37,7 +37,7 @@ npm i webpack --save-dev
 ```
 npm run build
 ```
-Запустите сборку командой
+* Запустите сборку командой
 ```
 npm run dev
 ```
